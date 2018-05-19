@@ -53,7 +53,11 @@ function newGame() {
     movesNumber = 0;
     moves.textContent = movesNumber;
   }
-  matchedCoupleCardsNumber = 0;
+  if (matchedCoupleCardsNumber !== 0) {
+    matchedCoupleCardsNumber = 0;
+    matchedCoupleCards.textContent = matchedCoupleCardsNumber;
+  }
+
 }
 newGame();
 
