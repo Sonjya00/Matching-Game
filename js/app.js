@@ -6,6 +6,12 @@ const matchedCoupleCards = document.getElementById('matchedCoupleCards');
 const moves = document.getElementById('moves');
 const restart = document.getElementById('restart');
 
+const allStarsHC = document.getElementsByClassName('star');
+const allStarsArray = Array.prototype.slice.call(allStarsHC);
+const star1= document.getElementById('star1');
+const star2= document.getElementById('star2');
+const star3= document.getElementById('star3');
+
 let openCardsHC = document.getElementsByClassName('open show');
 let toBeReflippedHC = document.getElementsByClassName('toBeReflipped');
 let matchCardsHC = document.getElementsByClassName('match');
@@ -15,16 +21,41 @@ let matchedCoupleCardsNumber = 0;
 //timer
 
 let sec = 0;
-let min = 0;
+//let min = 0;
     let timer = setInterval(function(){
         sec++;
-        document.getElementById('timerDisplaySeconds').textContent = sec;
+        document.getElementById('secondsElapsed').textContent = sec;
+        if (sec > 20) {
+          star3.classList.remove('fa-star');
+          star3.classList.add('fa-star-half-o');
+        }
+        if (sec > 30) {
+          star3.classList.remove('fa-star-half-o');
+          star3.classList.add('fa-star-o');
+        }
+        if (sec > 40) {
+          star2.classList.remove('fa-star');
+          star2.classList.add('fa-star-half-o');
+        }
+        if (sec > 50) {
+          star2.classList.remove('fa-star-half-o');
+          star2.classList.add('fa-star-o');
+        }
+        if (sec > 60) {
+          star1.classList.remove('fa-star');
+          star1.classList.add('fa-star-half-o');
+        }
+        if (sec > 70) {
+          star1.classList.remove('fa-star-half-o');
+          star1.classList.add('fa-star-o');
+        }
+        /* TO SPLIT SECONDS INTO MINUTES
         if (sec > 59) {
           min++;
           document.getElementById('timerDisplayMinutes').textContent = min;
           sec = 0;
-          document.getElementById('timerDisplaySeconds').textContent = sec;
-        }
+          document.getElementById('secondsElapsed').textContent = sec;
+        }*/
     }, 1000);
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -62,9 +93,14 @@ function newGame() {
     matchedCoupleCards.textContent = matchedCoupleCardsNumber;
   }
   sec = 0;
-  min = 0;
-  document.getElementById('timerDisplaySeconds').textContent = sec;
-  document.getElementById('timerDisplayMinutes').textContent = min;
+  //min = 0;
+  document.getElementById('secondsElapsed').textContent = sec;
+  //document.getElementById('timerDisplayMinutes').textContent = min;
+
+  allStarsArray.forEach(function(star) {
+    star.className = "fa fa-star star";
+  });
+
 }
 newGame();
 
@@ -156,17 +192,36 @@ function incrementMatchedCouples() {
   matchedCoupleCards.textContent = matchedCoupleCardsNumber;
 }
 
+  let starRating;
 //Check if all the couples have been matched
 function checkIfGameOver() {
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
+
+  calculateStarRating()
   if (matchCardsArray.length === 16) {
-    clearInterval(timer);
+    //clearInterval(timer);
     if (movesNumber <= 16) {
-      alert('You won! You\'ve got a great memory!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + min + ':' + sec);
+      if (starRating >= 2.5) {
+        alert('You won! You are a real fast thinker with great memory skills!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
+      } else if (starRating < 2.5 && starRating >= 2) {
+        alert('You won! You\'ve got good memory!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
+      } else if (starRating < 2 && starRating >= 1) {
+        alert('You won! You are a careful player but try working on your speed next time.\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
+      } else if (starRating < 1) {
+        alert('You won! But that took a while, didn\'t it?\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
+      }
     } else if (movesNumber > 16 && movesNumber <= 24) {
-      alert('You won! Keep training to get better!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + min + ':' + sec);
+      alert('You won! Keep training to get a better time and more stars!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
     } else if (movesNumber > 24 && movesNumber <= 32) {
-      alert('It took you a while, but you did it! Congratulations!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + min + ':' + sec);
+      if (starRating >= 2.5) {
+        alert('You won! You are a fast thinker but a fast clicker too!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
+      } else if (starRating < 2.5 && starRating >= 2) {
+        alert('You won! It took you a bit, but you did it!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
+      } else if (starRating < 2 && starRating >= 1) {
+        alert('You won! It took you a bit too long, but you did it!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
+      } else if (starRating < 1) {
+        alert('You won! But that took you a while and quite a few moves. Try working on your speed and be mindful about the moves number too next time.\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
+      }
     }
   }
 }
@@ -176,6 +231,24 @@ function checkIfMaxMovesNumber() {
     alert('Game over! You made too many moves! Too bad...\nMoves number: ' + movesNumber);
   } else {
     return;
+  }
+}
+
+function calculateStarRating() {
+  if (sec <= 20) {
+    starRating = 3;
+  } else if (sec > 20 && sec <=30) {
+    starRating = 2.5;
+  } else if (sec > 30 && sec <=40) {
+    starRating = 2;
+  } else if (sec > 40 && sec <=50) {
+    starRating = 1.5;
+  } else if (sec > 50 && sec <=60) {
+    starRating = 1;
+  } else if (sec > 60 && sec <=70) {
+    starRating = 0.5;
+  }  else if (sec > 60) {
+    starRating = 0.5;
   }
 }
 
