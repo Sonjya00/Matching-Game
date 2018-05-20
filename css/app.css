@@ -18,6 +18,7 @@ body {
 
 body {
     background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    /*background: #ffffff url('../img/congruent_pentagon.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -40,6 +41,7 @@ h1 {
 .deck {
     width: 660px;
     min-height: 680px;
+    /*background: linear-gradient(160deg, #b06ab3 0%, #4568dc 100%);*/
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;

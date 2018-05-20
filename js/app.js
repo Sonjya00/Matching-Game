@@ -1,13 +1,16 @@
-/*
- * Create a list that holds all of your cards
- */
+//LET & CONST
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+const deck = document.getElementById('deck');
+const cards = document.getElementsByClassName('card');
+const matchedCoupleCards = document.getElementById('matchedCoupleCards');
+const moves = document.getElementById('moves');
+const restart = document.getElementById('restart');
+
+let openCardsHC = document.getElementsByClassName('open show');
+let toBeReflippedHC = document.getElementsByClassName('toBeReflipped');
+let matchCardsHC = document.getElementsByClassName('match');
+let movesNumber = 0;
+let matchedCoupleCardsNumber = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -23,25 +26,13 @@ function shuffle(array) {
     return array;
 }
 
-const deck = document.getElementById('deck');
-const cards = document.getElementsByClassName('card');
-const matchedCoupleCards = document.getElementById('matchedCoupleCards');
-const moves = document.getElementById('moves');
-const restart = document.getElementById('restart');
-
-let openCardsHC = document.getElementsByClassName('open show');
-let toBeReflippedHC = document.getElementsByClassName('toBeReflipped');
-let matchCardsHC = document.getElementsByClassName('match');
-let movesNumber = 0;
-let matchedCoupleCardsNumber = 0;
-
 //Call function to shuffle cards, create HTML to display the cards, reset open/shown/matched cards, reset move number and matched cards number.
 function newGame() {
   let cardsList = Array.prototype.slice.call(cards);
   cardsList = shuffle(cardsList);
   for (var i = 0; i < cardsList.length; i++) {
     deck.appendChild(cardsList[i])
-    cardsList[i].setAttribute("id", i);
+    //cardsList[i].setAttribute("id", i);
   };
   if (matchCardsHC.length > 0) {
     resetCards();
@@ -57,7 +48,6 @@ function newGame() {
     matchedCoupleCardsNumber = 0;
     matchedCoupleCards.textContent = matchedCoupleCardsNumber;
   }
-
 }
 newGame();
 
@@ -88,18 +78,19 @@ function checkIfMatching() {
       setTimeout(handleMatchedCards, 1200);
       incrementMatchedCouples();
       setTimeout(checkIfGameOver, 1000);
-  } else {
-    openCardsArray.forEach(function(card) {
-      card.classList.add('toBeReflipped');
-    });
-  setTimeout(flipOpenCards, 1200);
+    } else {
+      openCardsArray.forEach(function(card) {
+        card.classList.add('toBeReflipped');
+      });
+      setTimeout(flipOpenCards, 1200);
   /*setTimeout(function closeCards() {
     openCardsArray[0].classList.remove('open', 'show');
     openCardsArray[0].classList.remove('open', 'show');
   }
 , 1200);*/
-    }
+      }
     incrementMovesNumber();
+    setTimeout(checkIfGameOver, 500);
   }
 
 //close the 2 cards confronted and any other open card, if there are more than 2 open besides the confronted ones.
@@ -116,7 +107,7 @@ function flipOpenCards() {
   }
 }
 
-//add the match class to the matched couple
+//remove open/show class to the matched couple
 function handleMatchedCards() {
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
   matchCardsArray.forEach(function(card) {
@@ -124,7 +115,7 @@ function handleMatchedCards() {
   });
 }
 
-//remove the class match to all matched cards.
+//remove the match class to all matched cards.
 function resetCards() {
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
   matchCardsArray.forEach(function(card) {
@@ -146,14 +137,19 @@ function incrementMatchedCouples() {
 
 //Check if all the couples have been matched
 function checkIfGameOver() {
+  if (movesNumber > 32) {
+    alert('Game over! You made too many moves! Too bad...\nMoves number: ' + movesNumber);
+  } else {
+    return;
+  }
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
   if (matchCardsArray.length === 16) {
     if (movesNumber <= 16) {
-      alert('You won! You\'ve got a great memory! Total moves: ' + movesNumber);
-    } else if (movesNumber > 16 && movesNumber <= 30) {
-      alert('You won! Keep training to get better! Total moves: ' + movesNumber);
-    } else if (movesNumber > 30) {
-      alert('It took you a while, but you did it! Total moves: ' + movesNumber);
+      alert('You won! You\'ve got a great memory!\nTotal moves: ' + movesNumber);
+    } else if (movesNumber > 16 && movesNumber <= 24) {
+      alert('You won! Keep training to get better!\nTotal moves: ' + movesNumber);
+    } else if (movesNumber > 24 && movesNumber <= 32) {
+      alert('It took you a while, but you did it! Congratulations!\nTotal moves: ' + movesNumber);
     }
   }
 }
@@ -161,14 +157,3 @@ function checkIfGameOver() {
 //EVENT LISTENERS
 deck.addEventListener('click', flipCard);
 restart.addEventListener('click', newGame);
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
