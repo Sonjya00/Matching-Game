@@ -12,6 +12,21 @@ let matchCardsHC = document.getElementsByClassName('match');
 let movesNumber = 0;
 let matchedCoupleCardsNumber = 0;
 
+//timer
+
+let sec = 0;
+let min = 0;
+    let timer = setInterval(function(){
+        sec++;
+        document.getElementById('timerDisplaySeconds').textContent = sec;
+        if (sec > 59) {
+          min++;
+          document.getElementById('timerDisplayMinutes').textContent = min;
+          sec = 0;
+          document.getElementById('timerDisplaySeconds').textContent = sec;
+        }
+    }, 1000);
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
@@ -34,12 +49,10 @@ function newGame() {
     deck.appendChild(cardsList[i])
     //cardsList[i].setAttribute("id", i);
   };
-  if (matchCardsHC.length > 0) {
+  if (matchCardsHC.length > 0 || openCardsHC.length > 0) {
     resetCards();
   };
-  if (openCardsHC.length > 0) {
-    flipOpenCards();
-  }
+
   if (movesNumber !==0) {
     movesNumber = 0;
     moves.textContent = movesNumber;
@@ -48,6 +61,10 @@ function newGame() {
     matchedCoupleCardsNumber = 0;
     matchedCoupleCards.textContent = matchedCoupleCardsNumber;
   }
+  sec = 0;
+  min = 0;
+  document.getElementById('timerDisplaySeconds').textContent = sec;
+  document.getElementById('timerDisplayMinutes').textContent = min;
 }
 newGame();
 
@@ -75,7 +92,7 @@ function checkIfMatching() {
       openCardsArray.forEach(function(card) {
         card.classList.add('match');
       });
-      setTimeout(handleMatchedCards, 1200);
+      handleMatchedCards();
       incrementMatchedCouples();
       setTimeout(checkIfGameOver, 1000);
     } else {
@@ -90,7 +107,7 @@ function checkIfMatching() {
 , 1200);*/
       }
     incrementMovesNumber();
-    setTimeout(checkIfGameOver, 500);
+    setTimeout(checkIfMaxMovesNumber, 500);
   }
 
 //close the 2 cards confronted and any other open card, if there are more than 2 open besides the confronted ones.
@@ -117,6 +134,10 @@ function handleMatchedCards() {
 
 //remove the match class to all matched cards.
 function resetCards() {
+  let openCardsArray = Array.prototype.slice.call(openCardsHC);
+  openCardsArray.forEach(function(card) {
+      card.classList.remove('open', 'show');
+  });
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
   matchCardsArray.forEach(function(card) {
     card.classList.remove('match');
@@ -137,20 +158,24 @@ function incrementMatchedCouples() {
 
 //Check if all the couples have been matched
 function checkIfGameOver() {
+  let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
+  if (matchCardsArray.length === 16) {
+    clearInterval(timer);
+    if (movesNumber <= 16) {
+      alert('You won! You\'ve got a great memory!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + min + ':' + sec);
+    } else if (movesNumber > 16 && movesNumber <= 24) {
+      alert('You won! Keep training to get better!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + min + ':' + sec);
+    } else if (movesNumber > 24 && movesNumber <= 32) {
+      alert('It took you a while, but you did it! Congratulations!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + min + ':' + sec);
+    }
+  }
+}
+
+function checkIfMaxMovesNumber() {
   if (movesNumber > 32) {
     alert('Game over! You made too many moves! Too bad...\nMoves number: ' + movesNumber);
   } else {
     return;
-  }
-  let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
-  if (matchCardsArray.length === 16) {
-    if (movesNumber <= 16) {
-      alert('You won! You\'ve got a great memory!\nTotal moves: ' + movesNumber);
-    } else if (movesNumber > 16 && movesNumber <= 24) {
-      alert('You won! Keep training to get better!\nTotal moves: ' + movesNumber);
-    } else if (movesNumber > 24 && movesNumber <= 32) {
-      alert('It took you a while, but you did it! Congratulations!\nTotal moves: ' + movesNumber);
-    }
   }
 }
 
