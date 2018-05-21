@@ -5,6 +5,9 @@ const CARDS = document.getElementsByClassName('card');
 const MATCHED_COUPLE_DISPLAY = document.getElementById('matchedCoupleDisplay');
 const MOVES_NUMBER_DISPLAY = document.getElementById('movesNumberDisplay');
 const RESTART_BUTTON = document.getElementById('restartButton');
+const PREVIOUS_SCORE_TABLE = document.getElementById('previous-score__table');
+const PREVIOUS_SCORE_CNT = document.getElementById('previous-score__container');
+
 
 let openCardsHC = document.getElementsByClassName('open show');
 let toBeReflippedHC = document.getElementsByClassName('toBeReflipped');
@@ -12,6 +15,7 @@ let matchCardsHC = document.getElementsByClassName('match');
 let movesNumber = 0;
 let matchedCouplesNumber = 0;
 let starRating = 3;
+let matchNumber = 1;
 
 //TIMER
 let sec = 0;
@@ -60,6 +64,8 @@ function restartGame() {
   ALL_STARS_ARRAY.forEach(function(star) {
     star.className = "fa fa-star star";
   });
+
+  matchNumber++;
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -186,6 +192,7 @@ function checkIfGameOver() {
       gameStatsMessage += '\nYour rating: ' + starRating + ' star';
     }
     alert(alertMessage + gameStatsMessage);
+    recordLastScore();
     clearInterval(timer);
   } else {
     return;
@@ -228,8 +235,16 @@ function checkMovesNumber() {
   }
 }
 
+//Short function that removes the shuffle class from deck, so that it can be reapplied the next time the restart button is clicked
 function removeDeckShuffleClass() {
   DECK.classList.remove('shake-to-shuffle');
+}
+
+//Create a row on the Previous Score table to record the game stats in case of victory
+function recordLastScore() {
+  let newLineScore = '<tr><td>' + matchNumber + '</td><td>' + sec + ' sec</td><td>' + movesNumber + '</td><td>' + starRating + '</td></tr>';
+PREVIOUS_SCORE_TABLE.insertAdjacentHTML('beforeend', newLineScore);
+PREVIOUS_SCORE_CNT.style.display = 'block';
 }
 
 //EVENT LISTENERS

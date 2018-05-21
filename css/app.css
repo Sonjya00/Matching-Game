@@ -29,9 +29,11 @@ body {
     justify-content: center;
 }
 
-h1 {
+h1,
+h2,
+h3 {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 /*
@@ -129,10 +131,45 @@ h1 {
     cursor: pointer;
     float: right;
     text-align: right;
-    width: 10%;
+    text-align: center;
+
 }
 
-/*FOOTER*/
+/*
+ * Styles for the Previous Score
+ */
+ 
+.previous-score__container {
+    display: none;
+}
+
+ .previous-score__container h2 {
+   text-align: center;
+}
+
+ .previous-score__table {
+    background-color: white;
+    margin: auto;
+    width: 660px;
+ }
+
+.previous-score__table th {
+    background-color: #02ccba;
+}
+
+ .previous-score__table tr,
+  .previous-score__table th,
+   .previous-score__table td {
+    border: 1px solid silver;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+ }
+
+/*
+ * Styles for Footer
+ */
+
 .footer__container {
   background-color: #3f3e3e;
   color: #fff;
@@ -151,7 +188,9 @@ h1 {
   display: inline-block;
 }
 
-/*CONTACTS LINKS*/
+/*
+ * Styles for Contacts Links
+ */
 
 .contacts-link {
   background-color: #27afc4;
@@ -182,7 +221,9 @@ h1 {
   color: #fff;
 }
 
-/*ANIMATIONS*/
+/*
+ * Styles for Animations
+ */
 
 @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }
