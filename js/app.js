@@ -166,7 +166,7 @@ function incrementMatchedCouples() {
 function checkIfGameOver() {
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
   let alertMessage;
-  let gameStatsMessage = '\nTime elapsed: ' + sec + ' seconds' + '\nTotal moves: ' + movesNumber + '\nYour rating: ' + starRating + ' stars';
+  let gameStatsMessage;
   if (matchCardsArray.length === 16) {
     if (starRating === 3) {
       alertMessage = 'You won! You have amazing memory skills!!';
@@ -180,6 +180,12 @@ function checkIfGameOver() {
       alertMessage = 'You won! Try finding the matching cards with less moves next time!!';
     } else if (starRating === 0.5) {
       alertMessage = 'You were close to the maximum number of moves... But you won!!';
+    }
+    gameStatsMessage = '\nTime elapsed: ' + sec + ' seconds' + '\nTotal moves: ' + movesNumber;
+    if (starRating >=2) {
+      gameStatsMessage += '\nYour rating: ' + starRating + ' stars';
+    } else if (starRating <=1.5) {
+      gameStatsMessage += '\nYour rating: ' + starRating + ' star';
     }
     alert(alertMessage + gameStatsMessage);
     clearInterval(timer);
