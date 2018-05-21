@@ -16,23 +16,32 @@ let openCardsHC = document.getElementsByClassName('open show');
 let toBeReflippedHC = document.getElementsByClassName('toBeReflipped');
 let matchCardsHC = document.getElementsByClassName('match');
 let movesNumber = 0;
-let matchedCoupleCardsNumber = 0;
+let matchedCouplesNumber = 0;
 let starRating = 3;
 
 //TIMER
 let sec = 0;
 //let min = 0;
-    let timer = setInterval(function(){
-        sec++;
-        document.getElementById('secondsElapsed').textContent = sec;
-        /* TO SPLIT SECONDS INTO MINUTES
-        if (sec > 59) {
-          min++;
-          document.getElementById('timerDisplayMinutes').textContent = min;
-          sec = 0;
-          document.getElementById('secondsElapsed').textContent = sec;
-        }*/
-    }, 1000);
+
+function myInterval() {
+  sec++;
+  document.getElementById('secondsElapsed').textContent = sec;
+}
+
+let timer = setInterval(myInterval, 1000);
+
+/*let timer = setInterval(function(){
+  sec++;
+  document.getElementById('secondsElapsed').textContent = sec;
+  /* TO SPLIT SECONDS INTO MINUTES
+  if (sec > 59) {
+    min++;
+    document.getElementById('timerDisplayMinutes').textContent = min;
+    sec = 0;
+    document.getElementById('secondsElapsed').textContent = sec;
+  }
+}, 1000);
+*/
 
 //Call function to shuffle cards, create HTML to display the cards, reset open/shown/matched cards, reset move number and matched cards number, reset seconds, reset star rating.
 function newGame() {
@@ -47,6 +56,10 @@ newGame();
 
 function restartGame() {
   newGame();
+
+  clearInterval(timer);
+  timer = setInterval(myInterval, 1000);
+
   if (matchCardsHC.length > 0 || openCardsHC.length > 0) {
     resetCards();
   };
@@ -54,9 +67,9 @@ function restartGame() {
     movesNumber = 0;
     movesNumberDisplay.textContent = movesNumber;
   }
-  if (matchedCoupleCardsNumber !== 0) {
-    matchedCoupleCardsNumber = 0;
-    matchedCoupleDisplay.textContent = matchedCoupleCardsNumber;
+  if (matchedCouplesNumber !== 0) {
+    matchedCouplesNumber = 0;
+    matchedCoupleDisplay.textContent = matchedCouplesNumber;
   }
   //clearInterval(timer);
   sec = 0;
@@ -163,8 +176,8 @@ function incrementMovesNumber() {
 
 //Increment matched couple number and display it
 function incrementMatchedCouples() {
-  matchedCoupleCardsNumber++;
-  matchedCoupleDisplay.textContent = matchedCoupleCardsNumber;
+  matchedCouplesNumber++;
+  matchedCoupleDisplay.textContent = matchedCouplesNumber;
 }
 
 //Check if all the couples have been matched and return alert according to time/star rating
@@ -187,6 +200,7 @@ function checkIfGameOver() {
       alertMessage = 'You were close to the maximum number of moves... But you won!!';
     }
     alert(alertMessage + gameStatsMessage);
+    clearInterval(timer);
   }
 }
 
@@ -217,6 +231,7 @@ function checkMovesNumber() {
     star1.classList.remove('fa-star');
     star1.classList.add('fa-star-o');
     alert('Game over! You made too many moves! Try again!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
+    clearInterval(timer);
   } else {
     return;
   }
