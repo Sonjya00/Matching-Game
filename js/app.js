@@ -2,9 +2,9 @@
 
 const deck = document.getElementById('deck');
 const cards = document.getElementsByClassName('card');
-const matchedCoupleCards = document.getElementById('matchedCoupleCards');
-const moves = document.getElementById('moves');
-const restart = document.getElementById('restart');
+const matchedCoupleDisplay = document.getElementById('matchedCoupleDisplay');
+const movesNumberDisplay = document.getElementById('movesNumberDisplay');
+const restartButton = document.getElementById('restartButton');
 
 const allStarsHC = document.getElementsByClassName('star');
 const allStarsArray = Array.prototype.slice.call(allStarsHC);
@@ -25,33 +25,6 @@ let sec = 0;
     let timer = setInterval(function(){
         sec++;
         document.getElementById('secondsElapsed').textContent = sec;
-
-        /*PARTS THAT ASSOCIATES STAR WITH TIME
-        /*if (sec > 20) {
-          star3.classList.remove('fa-star');
-          star3.classList.add('fa-star-half-o');
-        }
-        if (sec > 30) {
-          star3.classList.remove('fa-star-half-o');
-          star3.classList.add('fa-star-o');
-        }
-        if (sec > 40) {
-          star2.classList.remove('fa-star');
-          star2.classList.add('fa-star-half-o');
-        }
-        if (sec > 50) {
-          star2.classList.remove('fa-star-half-o');
-          star2.classList.add('fa-star-o');
-        }
-        if (sec > 60) {
-          star1.classList.remove('fa-star');
-          star1.classList.add('fa-star-half-o');
-        }
-        if (sec > 70) {
-          star1.classList.remove('fa-star-half-o');
-          star1.classList.add('fa-star-o');
-        }*/
-
         /* TO SPLIT SECONDS INTO MINUTES
         if (sec > 59) {
           min++;
@@ -59,7 +32,6 @@ let sec = 0;
           sec = 0;
           document.getElementById('secondsElapsed').textContent = sec;
         }*/
-
     }, 1000);
 
 //Call function to shuffle cards, create HTML to display the cards, reset open/shown/matched cards, reset move number and matched cards number, reset seconds, reset star rating.
@@ -70,16 +42,21 @@ function newGame() {
     deck.appendChild(cardsList[i])
     //cardsList[i].setAttribute("id", i);
   };
+}
+newGame();
+
+function restartGame() {
+  newGame();
   if (matchCardsHC.length > 0 || openCardsHC.length > 0) {
     resetCards();
   };
   if (movesNumber !==0) {
     movesNumber = 0;
-    moves.textContent = movesNumber;
+    movesNumberDisplay.textContent = movesNumber;
   }
   if (matchedCoupleCardsNumber !== 0) {
     matchedCoupleCardsNumber = 0;
-    matchedCoupleCards.textContent = matchedCoupleCardsNumber;
+    matchedCoupleDisplay.textContent = matchedCoupleCardsNumber;
   }
   //clearInterval(timer);
   sec = 0;
@@ -92,7 +69,6 @@ function newGame() {
     star.className = "fa fa-star star";
   });
 }
-newGame();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -140,11 +116,6 @@ function checkIfMatching() {
         card.classList.add('toBeReflipped');
       });
       setTimeout(flipOpenCards, 1200);
-  /*setTimeout(function closeCards() {
-    openCardsArray[0].classList.remove('open', 'show');
-    openCardsArray[0].classList.remove('open', 'show');
-  }
-, 1200);*/
       }
     incrementMovesNumber();
     setTimeout(checkMovesNumber, 500);
@@ -187,18 +158,17 @@ function resetCards() {
 //Increment moves number and display it
 function incrementMovesNumber() {
   movesNumber++;
-  moves.textContent = movesNumber;
+  movesNumberDisplay.textContent = movesNumber;
 }
 
 //Increment matched couple number and display it
 function incrementMatchedCouples() {
   matchedCoupleCardsNumber++;
-  matchedCoupleCards.textContent = matchedCoupleCardsNumber;
+  matchedCoupleDisplay.textContent = matchedCoupleCardsNumber;
 }
 
 //Check if all the couples have been matched and return alert according to time/star rating
 function checkIfGameOver() {
-  //calculateStarRating();
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
   let alertMessage;
   let gameStatsMessage = '\nTime elapsed: ' + sec + ' seconds' + '\nTotal moves: ' + movesNumber + '\nYour rating: ' + starRating + ' stars';
@@ -208,61 +178,17 @@ function checkIfGameOver() {
     } else if (starRating === 2.5) {
       alertMessage = 'You won! You have good memory skills!!';
     } else if (starRating === 2) {
-      alertMessage = 'You won! Keep exercising to improve your memory skills!!';
+      alertMessage = 'You won! Good job!!';
     } else if (starRating === 1.5) {
-      alertMessage = 'You won! Try finding the matching cards with less moves next time!!';
+      alertMessage = 'You won! Keep exercising to improve your memory skills!!';
     } else if (starRating === 1) {
       alertMessage = 'You won! Try finding the matching cards with less moves next time!!';
     } else if (starRating === 0.5) {
-      alertMessage = 'You were close to the maximum number of moves...But you won!!';
+      alertMessage = 'You were close to the maximum number of moves... But you won!!';
     }
-/*
-    if (movesNumber <= 16) {
-      if (starRating >= 2.5) {
-        alert('You won! You are a real fast thinker with great memory skills!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
-      } else if (starRating < 2.5 && starRating >= 2) {
-        alert('You won! You\'ve got good memory!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
-      } else if (starRating < 2 && starRating >= 1) {
-        alert('You won! You are a careful player but try working on your speed next time.\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
-      } else if (starRating < 1) {
-        alert('You won! But that took a while, didn\'t it?\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
-      }
-    } else if (movesNumber > 16 && movesNumber <= 24) {
-      alert('You won! Keep training to get a better time and more stars!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
-    } else if (movesNumber > 24 && movesNumber <= 32) {
-      if (starRating >= 2.5) {
-        alert('You won! You are a fast thinker but a fast clicker too!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
-      } else if (starRating < 2.5 && starRating >= 2) {
-        alert('You won! It took you a bit, but you did it!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
-      } else if (starRating < 2 && starRating >= 1) {
-        alert('You won! It took you a bit too long, but you did it!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
-      } else if (starRating < 1) {
-        alert('You won! But that took you a while and quite a few moves. Try working on your speed and be mindful about the moves number too next time.\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
-      }
-    }*/
     alert(alertMessage + gameStatsMessage);
   }
 }
-
-//USED TO CALCULATE STAR RATING WHEN IT WAS ASSOCIATED WITH TIME
-//Calculate star rating according to time elapsed
-/*function calculateStarRating() {
-  if (sec <= 20) {
-    starRating = 3;
-  } else if (sec > 20 && sec <=30) {
-    starRating = 2.5;
-  } else if (sec > 30 && sec <=40) {
-    starRating = 2;
-  } else if (sec > 40 && sec <=50) {
-    starRating = 1.5;
-  } else if (sec > 50 && sec <=60) {
-    starRating = 1;
-  } else if (sec > 60 && sec <=70) {
-    starRating = 0.5;
-  }  else if (sec > 60) {
-    starRating = 0.5;
-  }
-}*/
 
 //Check if max moves number has been reached
 function checkMovesNumber() {
@@ -298,4 +224,4 @@ function checkMovesNumber() {
 
 //EVENT LISTENERS
 deck.addEventListener('click', flipCard);
-restart.addEventListener('click', newGame);
+restartButton.addEventListener('click', restartGame);
