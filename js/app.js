@@ -21,29 +21,13 @@ let starRating = 3;
 
 //TIMER
 let sec = 0;
-//let min = 0;
-
 function myInterval() {
   sec++;
   document.getElementById('secondsElapsed').textContent = sec;
 }
-
 let timer = setInterval(myInterval, 1000);
 
-/*let timer = setInterval(function(){
-  sec++;
-  document.getElementById('secondsElapsed').textContent = sec;
-  /* TO SPLIT SECONDS INTO MINUTES
-  if (sec > 59) {
-    min++;
-    document.getElementById('timerDisplayMinutes').textContent = min;
-    sec = 0;
-    document.getElementById('secondsElapsed').textContent = sec;
-  }
-}, 1000);
-*/
-
-//Call function to shuffle cards, create HTML to display the cards, reset open/shown/matched cards, reset move number and matched cards number, reset seconds, reset star rating.
+//Call function to shuffle cards and create HTML to display the cards
 function newGame() {
   let cardsList = Array.prototype.slice.call(cards);
   cardsList = shuffle(cardsList);
@@ -54,10 +38,13 @@ function newGame() {
 }
 newGame();
 
+//Calls newGame function, reset timer, reset open/shown/matched cards, reset move number and matched cards number, reset star rating.
 function restartGame() {
   newGame();
 
   clearInterval(timer);
+  sec = 0;
+  document.getElementById('secondsElapsed').textContent = sec;
   timer = setInterval(myInterval, 1000);
 
   if (matchCardsHC.length > 0 || openCardsHC.length > 0) {
@@ -71,11 +58,6 @@ function restartGame() {
     matchedCouplesNumber = 0;
     matchedCoupleDisplay.textContent = matchedCouplesNumber;
   }
-  //clearInterval(timer);
-  sec = 0;
-  //min = 0;
-  document.getElementById('secondsElapsed').textContent = sec;
-  //document.getElementById('timerDisplayMinutes').textContent = min;
 
   starRating = 3;
   allStarsArray.forEach(function(star) {
@@ -114,7 +96,7 @@ function flipCard(evt) {
     }
   }
 
-//when 2 cards are open/shown, if their content match, assign class match, call function to unassign open/shown classes, add +1 matching couple found, call function to increment move by one and check if game is over. If they don't match, assign a temporary class to identity which cards need to be closed in case more than 2 cards were flipped, and call the function to close those 2 cards. In any case, the move number is incremented by one
+//when 2 cards are open/shown, if their content match, assign class match, call function to unassign open/shown classes, add +1 matching couple found, call function to increment move by one and check if game is over. If they don't match, assign a temporary class to identity which cards need to be closed in case more than 2 cards were flipped, and call the function to close those 2 cards. In any case, the move number is incremented by one and the moves number is check to adjust star rating and to determine if game is over by max moves number reached
 function checkIfMatching() {
   let openCardsArray = Array.prototype.slice.call(openCardsHC);
     if (openCardsArray[0].classList[1] === openCardsArray[1].classList[1]) {
@@ -180,7 +162,7 @@ function incrementMatchedCouples() {
   matchedCoupleDisplay.textContent = matchedCouplesNumber;
 }
 
-//Check if all the couples have been matched and return alert according to time/star rating
+//Check if all the couples have been matched, return alert according to star rating, stops timer
 function checkIfGameOver() {
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
   let alertMessage;
@@ -204,7 +186,7 @@ function checkIfGameOver() {
   }
 }
 
-//Check if max moves number has been reached
+//Check moves number to change star rating and check if maximum number of moves has been reached
 function checkMovesNumber() {
   if (movesNumber > 14 && movesNumber <=18) {
     starRating = 2.5;
@@ -212,7 +194,7 @@ function checkMovesNumber() {
     star3.classList.add('fa-star-half-o');
   } else if (movesNumber > 18 && movesNumber <=22) {
     starRating = 2;
-    star3.classList.remove('fa-star');
+    star3.classList.remove('fa-star-half-o');
     star3.classList.add('fa-star-o');
   } else if (movesNumber > 22 && movesNumber <=26) {
     starRating = 1.5;
@@ -220,15 +202,15 @@ function checkMovesNumber() {
     star2.classList.add('fa-star-half-o');
   } else if (movesNumber > 26 && movesNumber <=30) {
     starRating = 1;
-    star2.classList.remove('fa-star');
+    star2.classList.remove('fa-star-half-o');
     star2.classList.add('fa-star-o');
   } else if (movesNumber > 30 && movesNumber <=34) {
     starRating = 0.5;
     star1.classList.remove('fa-star');
     star1.classList.add('fa-star-half-o');
   } else if (movesNumber > 34) {
-    starRating = 0.5;
-    star1.classList.remove('fa-star');
+    starRating = 0;
+    star1.classList.remove('fa-star-half-o');
     star1.classList.add('fa-star-o');
     alert('Game over! You made too many moves! Try again!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
     clearInterval(timer);
