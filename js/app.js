@@ -1,16 +1,10 @@
 //LET & CONST
 
-const deck = document.getElementById('deck');
-const cards = document.getElementsByClassName('card');
-const matchedCoupleDisplay = document.getElementById('matchedCoupleDisplay');
-const movesNumberDisplay = document.getElementById('movesNumberDisplay');
-const restartButton = document.getElementById('restartButton');
-
-const allStarsHC = document.getElementsByClassName('star');
-const allStarsArray = Array.prototype.slice.call(allStarsHC);
-const star1= document.getElementById('star1');
-const star2= document.getElementById('star2');
-const star3= document.getElementById('star3');
+const DECK = document.getElementById('deck');
+const CARDS = document.getElementsByClassName('card');
+const MATCHED_COUPLE_DISPLAY = document.getElementById('matchedCoupleDisplay');
+const MOVES_NUMBER_DISPLAY = document.getElementById('movesNumberDisplay');
+const RESTART_BUTTON = document.getElementById('restartButton');
 
 let openCardsHC = document.getElementsByClassName('open show');
 let toBeReflippedHC = document.getElementsByClassName('toBeReflipped');
@@ -29,10 +23,10 @@ let timer = setInterval(myInterval, 1000);
 
 //Call function to shuffle cards and create HTML to display the cards
 function newGame() {
-  let cardsList = Array.prototype.slice.call(cards);
+  let cardsList = Array.prototype.slice.call(CARDS);
   cardsList = shuffle(cardsList);
   for (var i = 0; i < cardsList.length; i++) {
-    deck.appendChild(cardsList[i])
+    DECK.appendChild(cardsList[i])
     //cardsList[i].setAttribute("id", i);
   };
 }
@@ -52,15 +46,17 @@ function restartGame() {
   };
   if (movesNumber !==0) {
     movesNumber = 0;
-    movesNumberDisplay.textContent = movesNumber;
+    MOVES_NUMBER_DISPLAY.textContent = movesNumber;
   }
   if (matchedCouplesNumber !== 0) {
     matchedCouplesNumber = 0;
-    matchedCoupleDisplay.textContent = matchedCouplesNumber;
+    MATCHED_COUPLE_DISPLAY.textContent = matchedCouplesNumber;
   }
 
   starRating = 3;
-  allStarsArray.forEach(function(star) {
+  const ALL_STARS_HC = document.getElementsByClassName('star');
+  const ALL_STARS_ARRAY = Array.prototype.slice.call(ALL_STARS_HC);
+  ALL_STARS_ARRAY.forEach(function(star) {
     star.className = "fa fa-star star";
   });
 }
@@ -153,13 +149,13 @@ function resetCards() {
 //Increment moves number and display it
 function incrementMovesNumber() {
   movesNumber++;
-  movesNumberDisplay.textContent = movesNumber;
+  MOVES_NUMBER_DISPLAY.textContent = movesNumber;
 }
 
 //Increment matched couple number and display it
 function incrementMatchedCouples() {
   matchedCouplesNumber++;
-  matchedCoupleDisplay.textContent = matchedCouplesNumber;
+  MATCHED_COUPLE_DISPLAY.textContent = matchedCouplesNumber;
 }
 
 //Check if all the couples have been matched, return alert according to star rating, stops timer
@@ -194,30 +190,33 @@ function checkIfGameOver() {
 
 //Check moves number to change star rating and check if maximum number of moves has been reached
 function checkMovesNumber() {
+  const STAR_1= document.getElementById('star1');
+  const STAR_2= document.getElementById('star2');
+  const STAR_3= document.getElementById('star3');
   if (movesNumber > 14 && movesNumber <=18) {
     starRating = 2.5;
-    star3.classList.remove('fa-star');
-    star3.classList.add('fa-star-half-o');
+    STAR_3.classList.remove('fa-star');
+    STAR_3.classList.add('fa-star-half-o');
   } else if (movesNumber > 18 && movesNumber <=22) {
     starRating = 2;
-    star3.classList.remove('fa-star-half-o');
-    star3.classList.add('fa-star-o');
+    STAR_3.classList.remove('fa-star-half-o');
+    STAR_3.classList.add('fa-star-o');
   } else if (movesNumber > 22 && movesNumber <=26) {
     starRating = 1.5;
-    star2.classList.remove('fa-star');
-    star2.classList.add('fa-star-half-o');
+    STAR_2.classList.remove('fa-star');
+    STAR_2.classList.add('fa-star-half-o');
   } else if (movesNumber > 26 && movesNumber <=30) {
     starRating = 1;
-    star2.classList.remove('fa-star-half-o');
-    star2.classList.add('fa-star-o');
+    STAR_2.classList.remove('fa-star-half-o');
+    STAR_2.classList.add('fa-star-o');
   } else if (movesNumber > 30 && movesNumber <=34) {
     starRating = 0.5;
-    star1.classList.remove('fa-star');
-    star1.classList.add('fa-star-half-o');
+    STAR_1.classList.remove('fa-star');
+    STAR_1.classList.add('fa-star-half-o');
   } else if (movesNumber > 34) {
     starRating = 0;
-    star1.classList.remove('fa-star-half-o');
-    star1.classList.add('fa-star-o');
+    STAR_1.classList.remove('fa-star-half-o');
+    STAR_1.classList.add('fa-star-o');
     alert('Game over! You made too many moves! Try again!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
     clearInterval(timer);
   } else {
@@ -226,5 +225,5 @@ function checkMovesNumber() {
 }
 
 //EVENT LISTENERS
-deck.addEventListener('click', flipCard);
-restartButton.addEventListener('click', restartGame);
+DECK.addEventListener('click', flipCard);
+RESTART_BUTTON.addEventListener('click', restartGame);
