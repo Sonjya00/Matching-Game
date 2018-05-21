@@ -110,18 +110,24 @@ h1 {
     list-style: none;
 }
 
+.score-panel .timeElapsed {
+  display: inline-block;
+  width: 25%;
+}
+
 .score-panel .moves {
     display: inline-block;
-    width: 35%;
+    width: 25%;
 }
 
 .score-panel .matched {
     display: inline-block;
-    width: 35%;
+    width: 25%;
 }
 
 .score-panel .restart {
     cursor: pointer;
     float: right;
-    width: 15%;
+    text-align: right;
+    width: 10%;
 }
