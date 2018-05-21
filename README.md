@@ -34,3 +34,5 @@ Once you win or lose the game, or any time you want to restart the game, click o
 The game will register your score in the table beneath the cards every time you win.
 
 ## Credits
+
+Background pattern: [https://www.heropatterns.com/](https://www.heropatterns.com/)
