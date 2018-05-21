@@ -35,6 +35,7 @@ newGame();
 //Calls newGame function, reset timer, reset open/shown/matched cards, reset move number and matched cards number, reset star rating.
 function restartGame() {
   newGame();
+  DECK.classList.add('shake-to-shuffle');
 
   clearInterval(timer);
   sec = 0;
@@ -101,7 +102,7 @@ function checkIfMatching() {
       });
       handleMatchedCards();
       incrementMatchedCouples();
-      setTimeout(checkIfGameOver, 1000);
+      setTimeout(checkIfGameOver, 1200);
     } else {
       openCardsArray.forEach(function(card) {
         card.classList.add('toBeReflipped');
@@ -109,7 +110,7 @@ function checkIfMatching() {
       setTimeout(flipOpenCards, 1200);
       }
     incrementMovesNumber();
-    setTimeout(checkMovesNumber, 500);
+    setTimeout(checkMovesNumber, 1200);
   }
 
 //close the 2 cards confronted and any other open card, preventing there to be more than 1 open card besides the matched ones
@@ -161,9 +162,10 @@ function incrementMatchedCouples() {
 //Check if all the couples have been matched, return alert according to star rating, stops timer
 function checkIfGameOver() {
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
-  let alertMessage;
-  let gameStatsMessage;
   if (matchCardsArray.length === 16) {
+    let alertMessage;
+    let gameStatsMessage;
+
     if (starRating === 3) {
       alertMessage = 'You won! You have amazing memory skills!!';
     } else if (starRating === 2.5) {
@@ -185,6 +187,8 @@ function checkIfGameOver() {
     }
     alert(alertMessage + gameStatsMessage);
     clearInterval(timer);
+  } else {
+    return;
   }
 }
 
@@ -224,6 +228,11 @@ function checkMovesNumber() {
   }
 }
 
+function removeDeckShuffleClass() {
+  DECK.classList.remove('shake-to-shuffle');
+}
+
 //EVENT LISTENERS
 DECK.addEventListener('click', flipCard);
 RESTART_BUTTON.addEventListener('click', restartGame);
+RESTART_BUTTON.addEventListener('mouseover', removeDeckShuffleClass);
