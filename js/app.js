@@ -17,15 +17,17 @@ let toBeReflippedHC = document.getElementsByClassName('toBeReflipped');
 let matchCardsHC = document.getElementsByClassName('match');
 let movesNumber = 0;
 let matchedCoupleCardsNumber = 0;
+let starRating = 3;
 
-//timer
-
+//TIMER
 let sec = 0;
 //let min = 0;
     let timer = setInterval(function(){
         sec++;
         document.getElementById('secondsElapsed').textContent = sec;
-        if (sec > 20) {
+
+        /*PARTS THAT ASSOCIATES STAR WITH TIME
+        /*if (sec > 20) {
           star3.classList.remove('fa-star');
           star3.classList.add('fa-star-half-o');
         }
@@ -48,7 +50,8 @@ let sec = 0;
         if (sec > 70) {
           star1.classList.remove('fa-star-half-o');
           star1.classList.add('fa-star-o');
-        }
+        }*/
+
         /* TO SPLIT SECONDS INTO MINUTES
         if (sec > 59) {
           min++;
@@ -56,7 +59,40 @@ let sec = 0;
           sec = 0;
           document.getElementById('secondsElapsed').textContent = sec;
         }*/
+
     }, 1000);
+
+//Call function to shuffle cards, create HTML to display the cards, reset open/shown/matched cards, reset move number and matched cards number, reset seconds, reset star rating.
+function newGame() {
+  let cardsList = Array.prototype.slice.call(cards);
+  cardsList = shuffle(cardsList);
+  for (var i = 0; i < cardsList.length; i++) {
+    deck.appendChild(cardsList[i])
+    //cardsList[i].setAttribute("id", i);
+  };
+  if (matchCardsHC.length > 0 || openCardsHC.length > 0) {
+    resetCards();
+  };
+  if (movesNumber !==0) {
+    movesNumber = 0;
+    moves.textContent = movesNumber;
+  }
+  if (matchedCoupleCardsNumber !== 0) {
+    matchedCoupleCardsNumber = 0;
+    matchedCoupleCards.textContent = matchedCoupleCardsNumber;
+  }
+  //clearInterval(timer);
+  sec = 0;
+  //min = 0;
+  document.getElementById('secondsElapsed').textContent = sec;
+  //document.getElementById('timerDisplayMinutes').textContent = min;
+
+  starRating = 3;
+  allStarsArray.forEach(function(star) {
+    star.className = "fa fa-star star";
+  });
+}
+newGame();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -72,39 +108,7 @@ function shuffle(array) {
     return array;
 }
 
-//Call function to shuffle cards, create HTML to display the cards, reset open/shown/matched cards, reset move number and matched cards number.
-function newGame() {
-  let cardsList = Array.prototype.slice.call(cards);
-  cardsList = shuffle(cardsList);
-  for (var i = 0; i < cardsList.length; i++) {
-    deck.appendChild(cardsList[i])
-    //cardsList[i].setAttribute("id", i);
-  };
-  if (matchCardsHC.length > 0 || openCardsHC.length > 0) {
-    resetCards();
-  };
-
-  if (movesNumber !==0) {
-    movesNumber = 0;
-    moves.textContent = movesNumber;
-  }
-  if (matchedCoupleCardsNumber !== 0) {
-    matchedCoupleCardsNumber = 0;
-    matchedCoupleCards.textContent = matchedCoupleCardsNumber;
-  }
-  sec = 0;
-  //min = 0;
-  document.getElementById('secondsElapsed').textContent = sec;
-  //document.getElementById('timerDisplayMinutes').textContent = min;
-
-  allStarsArray.forEach(function(star) {
-    star.className = "fa fa-star star";
-  });
-
-}
-newGame();
-
-//Flip cards, store open/shown cards images in an array, and run check matching cards function.
+//Flip cards, store open/shown cards images in an array, run check matching cards function, and prevent more than 2 cards from being flipped.
 function flipCard(evt) {
   let flippedCard = evt.target;
   if (flippedCard.nodeName === 'LI') {
@@ -143,10 +147,10 @@ function checkIfMatching() {
 , 1200);*/
       }
     incrementMovesNumber();
-    setTimeout(checkIfMaxMovesNumber, 500);
+    setTimeout(checkMovesNumber, 500);
   }
 
-//close the 2 cards confronted and any other open card, if there are more than 2 open besides the confronted ones.
+//close the 2 cards confronted and any other open card, preventing there to be more than 1 open card besides the matched ones
 function flipOpenCards() {
   let toBeReflipped = Array.prototype.slice.call(toBeReflippedHC);
   toBeReflipped.forEach(function(card) {
@@ -168,7 +172,7 @@ function handleMatchedCards() {
   });
 }
 
-//remove the match class to all matched cards.
+//remove open/show/match class to all matched cards.
 function resetCards() {
   let openCardsArray = Array.prototype.slice.call(openCardsHC);
   openCardsArray.forEach(function(card) {
@@ -192,14 +196,27 @@ function incrementMatchedCouples() {
   matchedCoupleCards.textContent = matchedCoupleCardsNumber;
 }
 
-  let starRating;
-//Check if all the couples have been matched
+//Check if all the couples have been matched and return alert according to time/star rating
 function checkIfGameOver() {
+  //calculateStarRating();
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
-
-  calculateStarRating()
+  let alertMessage;
+  let gameStatsMessage = '\nTime elapsed: ' + sec + ' seconds' + '\nTotal moves: ' + movesNumber + '\nYour rating: ' + starRating + ' stars';
   if (matchCardsArray.length === 16) {
-    //clearInterval(timer);
+    if (starRating === 3) {
+      alertMessage = 'You won! You have amazing memory skills!!';
+    } else if (starRating === 2.5) {
+      alertMessage = 'You won! You have good memory skills!!';
+    } else if (starRating === 2) {
+      alertMessage = 'You won! Keep exercising to improve your memory skills!!';
+    } else if (starRating === 1.5) {
+      alertMessage = 'You won! Try finding the matching cards with less moves next time!!';
+    } else if (starRating === 1) {
+      alertMessage = 'You won! Try finding the matching cards with less moves next time!!';
+    } else if (starRating === 0.5) {
+      alertMessage = 'You were close to the maximum number of moves...But you won!!';
+    }
+/*
     if (movesNumber <= 16) {
       if (starRating >= 2.5) {
         alert('You won! You are a real fast thinker with great memory skills!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
@@ -222,19 +239,14 @@ function checkIfGameOver() {
       } else if (starRating < 1) {
         alert('You won! But that took you a while and quite a few moves. Try working on your speed and be mindful about the moves number too next time.\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
       }
-    }
+    }*/
+    alert(alertMessage + gameStatsMessage);
   }
 }
 
-function checkIfMaxMovesNumber() {
-  if (movesNumber > 32) {
-    alert('Game over! You made too many moves! Too bad...\nMoves number: ' + movesNumber);
-  } else {
-    return;
-  }
-}
-
-function calculateStarRating() {
+//USED TO CALCULATE STAR RATING WHEN IT WAS ASSOCIATED WITH TIME
+//Calculate star rating according to time elapsed
+/*function calculateStarRating() {
   if (sec <= 20) {
     starRating = 3;
   } else if (sec > 20 && sec <=30) {
@@ -249,6 +261,38 @@ function calculateStarRating() {
     starRating = 0.5;
   }  else if (sec > 60) {
     starRating = 0.5;
+  }
+}*/
+
+//Check if max moves number has been reached
+function checkMovesNumber() {
+  if (movesNumber > 14 && movesNumber <=18) {
+    starRating = 2.5;
+    star3.classList.remove('fa-star');
+    star3.classList.add('fa-star-half-o');
+  } else if (movesNumber > 18 && movesNumber <=22) {
+    starRating = 2;
+    star3.classList.remove('fa-star');
+    star3.classList.add('fa-star-o');
+  } else if (movesNumber > 22 && movesNumber <=26) {
+    starRating = 1.5;
+    star2.classList.remove('fa-star');
+    star2.classList.add('fa-star-half-o');
+  } else if (movesNumber > 26 && movesNumber <=30) {
+    starRating = 1;
+    star2.classList.remove('fa-star');
+    star2.classList.add('fa-star-o');
+  } else if (movesNumber > 30 && movesNumber <=34) {
+    starRating = 0.5;
+    star1.classList.remove('fa-star');
+    star1.classList.add('fa-star-half-o');
+  } else if (movesNumber > 34) {
+    starRating = 0.5;
+    star1.classList.remove('fa-star');
+    star1.classList.add('fa-star-o');
+    alert('Game over! You made too many moves! Try again!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
+  } else {
+    return;
   }
 }
 
