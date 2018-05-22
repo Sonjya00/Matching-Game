@@ -103,22 +103,24 @@ function flipCard(evt) {
 //when 2 cards are open/shown, if their content match, assign class match, call function to unassign open/shown classes, add +1 matching couple found, call function to increment move by one and check if game is over. If they don't match, assign a temporary class to identity which cards need to be closed in case more than 2 cards were flipped, and call the function to close those 2 cards. In any case, the move number is incremented by one and the moves number is check to adjust star rating and to determine if game is over by max moves number reached
 function checkIfMatching() {
   let openCardsArray = Array.prototype.slice.call(openCardsHC);
-    if (openCardsArray[0].classList[1] === openCardsArray[1].classList[1]) {
-      openCardsArray.forEach(function(card) {
-        card.classList.add('match');
-      });
-      handleMatchedCards();
-      incrementMatchedCouples();
-      setTimeout(checkIfGameOver, 1200);
-    } else {
-      openCardsArray.forEach(function(card) {
-        card.classList.add('toBeReflipped');
-      });
-      setTimeout(flipOpenCards, 1200);
-      }
+  if (openCardsArray[0].classList[1] === openCardsArray[1].classList[1]) {
+    openCardsArray.forEach(function(card) {
+      card.classList.add('match');
+    });
+    handleMatchedCards();
+    incrementMatchedCouples();
     incrementMovesNumber();
-    setTimeout(checkMovesNumber, 1200);
+    setTimeout(checkMovesNumber, 300);
+    setTimeout(checkIfGameOver, 500);
+  } else {
+    openCardsArray.forEach(function(card) {
+      card.classList.add('toBeReflipped');
+    });
+    incrementMovesNumber();
+    setTimeout(checkMovesNumber, 300);
+    setTimeout(flipOpenCards, 800);
   }
+}
 
 //close the 2 cards confronted and any other open card, preventing there to be more than 1 open card besides the matched ones
 function flipOpenCards() {
@@ -178,26 +180,29 @@ function checkIfGameOver() {
     let gameStatsMessage;
 
     if (starRating === 3) {
-      alertMessage = 'You won! You have amazing memory skills!!';
+      alertMessage = '<h3>You won! You have amazing memory skills!!</h3>';
     } else if (starRating === 2.5) {
-      alertMessage = 'You won! You have good memory skills!!';
+      alertMessage = '<h3>You won! You have good memory skills!!</h3>';
     } else if (starRating === 2) {
-      alertMessage = 'You won! Good job!!';
+      alertMessage = '<h3>You won! Good job!!</h3>';
     } else if (starRating === 1.5) {
-      alertMessage = 'You won! Keep exercising to improve your memory skills!!';
+      alertMessage = '<h3>You won! Keep exercising to improve your memory skills!!</h3>';
     } else if (starRating === 1) {
-      alertMessage = 'You won! Try finding the matching cards with less moves next time!!';
+      alertMessage = '<h3>You won! Try finding the matching cards with less moves next time!!</h3>';
     } else if (starRating === 0.5) {
-      alertMessage = 'You were close to the maximum number of moves... But you won!!';
+      alertMessage = '<h3>You were close to the maximum number of moves... But you won!!</h3>';
     }
-    gameStatsMessage = '\nTime elapsed: ' + sec + ' seconds' + '\nTotal moves: ' + movesNumber;
+    gameStatsMessage = '<p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber +'</p>';
     if (starRating >=2) {
-      gameStatsMessage += '\nYour rating: ' + starRating + ' stars';
+      gameStatsMessage += '<p><strong>Your rating:</strong> ' + starRating + ' stars</p>';
     } else if (starRating <=1.5) {
-      gameStatsMessage += '\nYour rating: ' + starRating + ' star';
+      gameStatsMessage += '<p><strong>Your rating:</strong> ' + starRating + ' star</p>';
     }
-    alert(alertMessage + gameStatsMessage);
     recordLastScore();
+    let gameOverMsg = document.getElementById('gameOverMsg');
+    gameOverMsg.innerHTML = alertMessage + gameStatsMessage;
+    MODAL.style.display = 'block';
+    /*alert(alertMessage + gameStatsMessage);*/
     clearInterval(timer);
   } else {
     return;
@@ -250,6 +255,41 @@ function recordLastScore() {
   let newLineScore = '<tr><td>' + matchNumber + '</td><td>' + sec + ' sec</td><td>' + movesNumber + '</td><td>' + starRating + '</td></tr>';
 PREVIOUS_SCORE_TABLE.insertAdjacentHTML('beforeend', newLineScore);
 PREVIOUS_SCORE_CNT.style.display = 'block';
+}
+
+//Modal
+
+//Temporary
+// Get the button that opens the modal
+let btn = document.getElementById("myBtn");
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    MODAL.style.display = "block";
+}
+
+// Get the modal
+const MODAL = document.getElementById('myModal');
+
+// Get x and Restart button
+const ESCAPE_MODAL_BTN = document.getElementsByClassName("modal-close")[0];
+const RESTART_MODAL_BTN = document.getElementById("restartModalButton");
+
+// When the user clicks on (x), close the modal
+ESCAPE_MODAL_BTN.onclick = function() {
+    MODAL.style.display = "none";
+}
+
+// When the user clicks on Restart, close the modal and restart game
+RESTART_MODAL_BTN.onclick = function() {
+    MODAL.style.display = "none";
+    restartGame();
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        MODAL.style.display = "none";
+    }
 }
 
 //EVENT LISTENERS
