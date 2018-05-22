@@ -13,7 +13,7 @@ The game board consists of sixteen "cards" arranged in a grid. The deck is made 
 The game allows the player to flip over two cards at a time and it checks if the cards have matching symbols. If they do, they will stay flipped face up. If they don't, they will be flipped face down again.
 To win the game, the player has to find all the matching pairs.
 
-When a user wins the game, the timer stops and a popup appears to congratulate the player. The popup also tells the player how much time and how many moves it took to win the game, and what the star rating was.
+When a user wins the game, the timer stops and a modal appears to congratulate the player. The modal also tells the player how much time and how many moves it took to win the game, and what the star rating was.
 
 On top of the game board, a star rating system (from 0 to 3), the time elapsed, the number of moves, and the cards matched so far are displayed.
 

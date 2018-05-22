@@ -132,12 +132,12 @@ h2 {
 
 .score-panel .timeElapsed {
     display: inline-block;
-    width: 25%;
+    width: 20%;
 }
 
 .score-panel .moves {
     display: inline-block;
-    width: 25%;
+    width: 30%;
 }
 
 .score-panel .matched {
@@ -150,7 +150,7 @@ h2 {
     float: right;
     text-align: right;
     text-align: center;
-
+    width: 15%;
 }
 
 /*

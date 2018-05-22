@@ -66,6 +66,8 @@ function restartGame() {
   });
 
   matchNumber++;
+
+  setTimeout(removeDeckShuffleClass, 1200);
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -295,4 +297,3 @@ window.onclick = function(event) {
 //EVENT LISTENERS
 DECK.addEventListener('click', flipCard);
 RESTART_BUTTON.addEventListener('click', restartGame);
-RESTART_BUTTON.addEventListener('mouseover', removeDeckShuffleClass);
