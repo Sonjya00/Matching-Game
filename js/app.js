@@ -12,6 +12,7 @@ const PREVIOUS_SCORE_CNT = document.getElementById('previous-score__container');
 let openCardsHC = document.getElementsByClassName('open show');
 let toBeReflippedHC = document.getElementsByClassName('toBeReflipped');
 let matchCardsHC = document.getElementsByClassName('match');
+let gameOverMsg = document.getElementById('gameOverMsg');
 let movesNumber = 0;
 let matchedCouplesNumber = 0;
 let starRating = 3;
@@ -201,7 +202,6 @@ function checkIfGameOver() {
       gameStatsMessage += '<p><strong>Your rating:</strong> ' + starRating + ' star</p>';
     }
     recordLastScore();
-    let gameOverMsg = document.getElementById('gameOverMsg');
     gameOverMsg.innerHTML = alertMessage + gameStatsMessage;
     MODAL.style.display = 'block';
     /*alert(alertMessage + gameStatsMessage);*/
@@ -240,7 +240,9 @@ function checkMovesNumber() {
     starRating = 0;
     STAR_1.classList.remove('fa-star-half-o');
     STAR_1.classList.add('fa-star-o');
-    alert('Game over! You made too many moves! Try again!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');
+    /*alert('Game over! You made too many moves! Try again!\nTotal moves: ' + movesNumber + '\nTime elapsed: ' + sec + ' seconds' + '\nYour rating: ' + starRating + ' stars');*/
+    gameOverMsg.innerHTML = '<h3>Game over! You made too many moves! Try again!</h3><p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber + '</p><p><strong>Your rating:</strong> ' + starRating + ' stars</p>';
+    MODAL.style.display = 'block';
     clearInterval(timer);
   } else {
     return;
