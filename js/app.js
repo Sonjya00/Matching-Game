@@ -87,6 +87,7 @@ function flipCard(evt) {
   let flippedCard = evt.target;
   if (flippedCard.nodeName === 'LI') {
     if (!flippedCard.classList.contains('match') && !flippedCard.classList.contains('open')) {
+      flippedCard.classList.remove('closed');
       flippedCard.classList.add('open', 'show');
     }
   }
@@ -123,11 +124,13 @@ function checkIfMatching() {
 function flipOpenCards() {
   let toBeReflipped = Array.prototype.slice.call(toBeReflippedHC);
   toBeReflipped.forEach(function(card) {
+    card.classList.add('closed');
     card.classList.remove('open', 'show', 'toBeReflipped');
   });
   let openCardsArray = Array.prototype.slice.call(openCardsHC);
   if (openCardsArray.length>1) {
     openCardsArray.forEach(function(card) {
+      card.classList.add('closed');
       card.classList.remove('open', 'show');
     });
   }
@@ -145,10 +148,12 @@ function handleMatchedCards() {
 function resetCards() {
   let openCardsArray = Array.prototype.slice.call(openCardsHC);
   openCardsArray.forEach(function(card) {
+      card.classList.add('closed');
       card.classList.remove('open', 'show');
   });
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
   matchCardsArray.forEach(function(card) {
+    card.classList.add('closed');
     card.classList.remove('match');
   });
 }
