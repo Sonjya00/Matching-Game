@@ -11,6 +11,9 @@ const STAR_2= document.getElementById('star2');
 const STAR_3= document.getElementById('star3');
 const ALL_STARS_HC = document.getElementsByClassName('star');
 const ALL_STARS_ARRAY = Array.prototype.slice.call(ALL_STARS_HC);
+const MODAL = document.getElementById('myModal');
+const ESCAPE_MODAL_BTN = document.getElementsByClassName('modal__close-btn')[0];
+const RESTART_MODAL_BTN = document.getElementsByClassName('modal__restart-btn')[0];
 
 let openCardsHC = document.getElementsByClassName('open show');
 let toBeReflippedHC = document.getElementsByClassName('toBeReflipped');
@@ -288,7 +291,29 @@ PREVIOUS_SCORE_TABLE.insertAdjacentHTML('beforeend', newLineScore);
 PREVIOUS_SCORE_CNT.style.display = 'block';
 }
 
-//Modal
+//EVENT LISTENERS
+DECK.addEventListener('click', flipCard, false);
+RESTART_BUTTON.addEventListener('click', restartGame, false);
+
+//MODAL
+
+//Close the modal and restart the game when the player clicks on Restart
+RESTART_MODAL_BTN.onclick = function() {
+  MODAL.style.display = 'none';
+  restartGame();
+};
+
+//Close the modal when the player clicks on the cross button
+ESCAPE_MODAL_BTN.onclick = function() {
+  MODAL.style.display = 'none';
+};
+
+//Close the modal when the player clicks anywhere outside of it
+window.onclick = function(event) {
+  if (event.target == MODAL) {
+    MODAL.style.display = 'none';
+  }
+};
 
 //Temporary
 // Get the button that opens the modal
@@ -297,37 +322,3 @@ let btn = document.getElementById('myBtn');
 btn.onclick = function() {
     MODAL.style.display = 'block';
 };
-
-// Get the modal
-const MODAL = document.getElementById('myModal');
-
-// Get x and Restart button
-const ESCAPE_MODAL_BTN = document.getElementsByClassName('modal__close-btn')[0];
-const RESTART_MODAL_BTN = document.getElementsByClassName('modal__restart-btn')[0];
-
-// When the user clicks on (x), close the modal
-ESCAPE_MODAL_BTN.onclick = function() {
-    MODAL.style.display = 'none';
-};
-
-// When the user clicks on Restart, close the modal and restart game
-RESTART_MODAL_BTN.onclick = function() {
-    MODAL.style.display = 'none';
-    restartGame();
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == MODAL) {
-        MODAL.style.display = 'none';
-    }
-};
-
-//EVENT LISTENERS
-DECK.addEventListener('click', flipCard, false);
-RESTART_BUTTON.addEventListener('click', restartGame, false);
-/*
-RESTART_MODAL_BTN.addEventListener('click', function() {
-  MODAL.style.display = 'none';
-  restartGame();
-})*/

@@ -36,5 +36,3 @@ The game will register your score in the table beneath the cards every time you 
 ## Credits
 
 Background pattern: [https://www.heropatterns.com/](https://www.heropatterns.com/)
-
-Modal: https://www.w3schools.com/howto/howto_css_modals.asp
