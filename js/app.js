@@ -32,8 +32,8 @@ function myInterval() {
 }
 let timer = setInterval(myInterval, 1000);
 
-//Called to start the 1st game
-//Call function to shuffle cards and create HTML to display the cards on the board
+//Called to start the 1st game.
+//Call function to shuffle cards and create HTML to display the cards on the board.
 function newGame() {
   let cardsList = Array.prototype.slice.call(CARDS);
   cardsList = shuffle(cardsList);
@@ -43,7 +43,7 @@ function newGame() {
 }
 newGame();
 
-//Called from the 2nd game on
+//Called from the 2nd game on.
 //Call newGame function, reset timer, open/shown/matched cards,
 //move no., matched cards no., star rating and star displayed
 //Increase game # and restart timer.
@@ -166,20 +166,12 @@ function checkIfMatching() {
 //Called to both flip up and flip down cards.
 //Close the 2 cards confronted and any other open card,
 //preventing there to be more than 1 open card besides the matched ones.
-//MAYBE 2ND PART ISN'T NEEDED
 function flipOpenCards() {
   let toBeReflipped = Array.prototype.slice.call(toBeReflippedHC);
   toBeReflipped.forEach(function(card) {
     card.classList.add('closed');
     card.classList.remove('open', 'show', 'toBeReflipped');
-  });/*
-  let openCardsArray = Array.prototype.slice.call(openCardsHC);
-  if (openCardsArray.length>1) {
-    openCardsArray.forEach(function(card) {
-      card.classList.add('closed');
-      card.classList.remove('open', 'show');
-    });
-  }*/
+  });
 }
 
 //Add .match and remove .open/show class to the matched pair
@@ -202,7 +194,7 @@ function incrementMovesNumber() {
   MOVES_NUMBER_DISPLAY.textContent = movesNumber;
 }
 
-//Check moves number to change star rating and check if maximum number of moves has been reached
+//Check moves no. to change star rating and check if maximum moves no. has been reached.
 function checkMovesNumber() {
   if (movesNumber > 14 && movesNumber <=18) {
     starRating = 2.5;
@@ -284,7 +276,7 @@ function setStarRating() {
   modalMessage.innerHTML = alertMessage + gameStatsMessage;
 }
 
-//Create a row on the Previous Score table to record the game stats in case of victory
+//Create a row on the Previous Score table to record game stats in case of victory.
 function recordLastScore() {
   let newLineScore = '<tr><td>' + matchNumber + '</td><td>' + sec + ' sec</td><td>' + movesNumber + '</td><td>' + starRating + '</td></tr>';
 PREVIOUS_SCORE_TABLE.insertAdjacentHTML('beforeend', newLineScore);
@@ -297,28 +289,20 @@ RESTART_BUTTON.addEventListener('click', restartGame, false);
 
 //MODAL
 
-//Close the modal and restart the game when the player clicks on Restart
+//Close the modal and restart the game when the player clicks on Restart.
 RESTART_MODAL_BTN.onclick = function() {
   MODAL.style.display = 'none';
   restartGame();
 };
 
-//Close the modal when the player clicks on the cross button
+//Close the modal when the player clicks on the cross button.
 ESCAPE_MODAL_BTN.onclick = function() {
   MODAL.style.display = 'none';
 };
 
-//Close the modal when the player clicks anywhere outside of it
+//Close the modal when the player clicks anywhere outside of it.
 window.onclick = function(event) {
   if (event.target == MODAL) {
     MODAL.style.display = 'none';
   }
-};
-
-//Temporary
-// Get the button that opens the modal
-let btn = document.getElementById('myBtn');
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-    MODAL.style.display = 'block';
 };
