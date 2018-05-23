@@ -1,96 +1,96 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    <title>Matching Game</title>
-    <meta name="description" content="">
-    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
-    <link rel="stylesheet" href="css/app.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matching Game</title>
+  <meta name="description" content="">
+  <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+  <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Matching Game</h1>
-        </header>
+  <div class="container">
 
-        <section class="score-panel">
-        	<ul class="stars">
-        		<li><i id="star1" class="fa fa-star star"></i></li>
-        		<li><i id="star2" class="fa fa-star star"></i></li>
-        		<li><i id="star3" class="fa fa-star star"></i></li>
-        	</ul>
+    <header>
+      <h1>Matching Game</h1>
+      </header>
 
-          <div id="timeElapsed" class="timeElapsed">
+      <section class="score-panel__container">
+        <ul class="score-panel__stars">
+      		<li><i id="star1" class="fa fa-star star"></i></li>
+      		<li><i id="star2" class="fa fa-star star"></i></li>
+      		<li><i id="star3" class="fa fa-star star"></i></li>
+      	</ul>
+
+        <div class="score-panel__time-elapsed">
           <span id="secondsElapsed">0</span> s
-          </div>
+        </div>
 
-          <div class="moves">
-          	<span id="movesNumberDisplay">0</span> Moves
-          </div>
+        <div class="score-panel__moves">
+        	<span id="movesNumberDisplay">0</span> Moves
+        </div>
 
-          <div class="matched">
-            <span id="matchedCoupleDisplay">0</span> /8 Matched
-          </div>
+        <div class="score-panel__matched">
+          <span id="matchedCoupleDisplay">0</span> /8 Matched
+        </div>
 
-            <div id="restartButton" class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
+        <div id="restartButton" class="score-panel__restart-btn">
+      		<i class="fa fa-repeat"></i>
+      	</div>
+      </section>
 
-        </section>
-
-        <ul id="deck" class="deck">
-            <li class="card diamond closed">
-                <i class="fa fa-diamond"></i>
-            </li>
-            <li class="card plane closed">
-                <i class="fa fa-paper-plane-o"></i>
-            </li>
-            <li class="card anchor closed">
-                <i class="fa fa-anchor"></i>
-            </li>
-            <li class="card bolt closed">
-                <i class="fa fa-bolt"></i>
-            </li>
-            <li class="card cube closed">
-                <i class="fa fa-cube"></i>
-            </li>
-            <li class="card anchor closed">
-                <i class="fa fa-anchor"></i>
-            </li>
-            <li class="card leaf closed">
-                <i class="fa fa-leaf"></i>
-            </li>
-            <li class="card bicycle closed">
-                <i class="fa fa-bicycle"></i>
-            </li>
-            <li class="card diamond closed">
-                <i class="fa fa-diamond"></i>
-            </li>
-            <li class="card bomb closed">
-                <i class="fa fa-bomb"></i>
-            </li>
-            <li class="card leaf closed">
-                <i class="fa fa-leaf"></i>
-            </li>
-            <li class="card bomb closed">
-                <i class="fa fa-bomb"></i>
-            </li>
-            <li class="card bolt closed">
-                <i class="fa fa-bolt"></i>
-            </li>
-            <li class="card bicycle closed">
-                <i class="fa fa-bicycle"></i>
-            </li>
-            <li class="card plane closed">
-                <i class="fa fa-paper-plane-o"></i>
-            </li>
-            <li class="card cube closed">
-                <i class="fa fa-cube"></i>
-            </li>
-        </ul>
+      <ul id="deck" class="deck__container">
+        <li class="card diamond closed">
+          <i class="fa fa-diamond"></i>
+        </li>
+        <li class="card plane closed">
+          <i class="fa fa-paper-plane-o"></i>
+        </li>
+        <li class="card anchor closed">
+          <i class="fa fa-anchor"></i>
+        </li>
+        <li class="card bolt closed">
+          <i class="fa fa-bolt"></i>
+        </li>
+        <li class="card cube closed">
+          <i class="fa fa-cube"></i>
+        </li>
+        <li class="card anchor closed">
+          <i class="fa fa-anchor"></i>
+        </li>
+        <li class="card leaf closed">
+          <i class="fa fa-leaf"></i>
+        </li>
+        <li class="card bicycle closed">
+          <i class="fa fa-bicycle"></i>
+        </li>
+        <li class="card diamond closed">
+          <i class="fa fa-diamond"></i>
+        </li>
+        <li class="card bomb closed">
+          <i class="fa fa-bomb"></i>
+        </li>
+        <li class="card leaf closed">
+          <i class="fa fa-leaf"></i>
+        </li>
+        <li class="card bomb closed">
+          <i class="fa fa-bomb"></i>
+        </li>
+        <li class="card bolt closed">
+          <i class="fa fa-bolt"></i>
+        </li>
+        <li class="card bicycle closed">
+          <i class="fa fa-bicycle"></i>
+        </li>
+        <li class="card plane closed">
+          <i class="fa fa-paper-plane-o"></i>
+        </li>
+        <li class="card cube closed">
+          <i class="fa fa-cube"></i>
+        </li>
+      </ul>
     </div>
 
     <section id="previous-score__container" class="previous-score__container">
@@ -108,19 +108,19 @@
           </th>
           <th>Number of Moves
           </th>
-          <th><i id="star1" class="fa fa-star star"></i> Star Rating <i id="star1" class="fa fa-star star"></i>
+          <th><i class="fa fa-star star"></i> Star Rating <i class="fa fa-star star"></i>
           </th>
         </tr>
       </table>
     </section>
 
     <!-- Modal content -->
-    <div id="myModal" class="modal-background">
-      <div class="modal-window">
-        <span class="modal-close">&times;</span>
-        <div id="gameOverMsg" class="modal-message"></div>
+    <div id="myModal" class="modal__background">
+      <div class="modal__window">
+        <span class="modal__close-btn">&times;</span>
+        <div id="modalMessage"></div>
         <h3>Wanna play again?</h3>
-        <button id="restartModalButton" class="modal-restart-btn">New Game!</button>
+        <button class="modal__restart-btn">New Game!</button>
       </div>
     </div>
     <!--Modal btn temporary-->
@@ -130,7 +130,7 @@
       <h3>About this page</h3>
       <div class="footer__about">
         <p>© 2018 - Written and coded by Sonia Gorla</p>
-        </div>
+      </div>
         <ul class="footer__social-media">
           <li class="contacts-link"><a href="mailto:soniagorla@msn.com"><i class="fa fa-envelope-o"></i></a></li>
           <li class="contacts-link"><a href="https://www.facebook.com/sonia.gorla" target="_blank"><i class="fa fa-facebook"></i></a></li>

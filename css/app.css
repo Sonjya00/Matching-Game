@@ -17,12 +17,9 @@ body {
 }
 
 body {
-    /*background: #ffffff url('../img/geometry2.png');*//* Background pattern from Subtle Patterns */
-    /*background: #ffffff url('../img/congruent_pentagon.png'); /* Background pattern from Subtle Patterns*/
-    font-family: 'Coda', cursive;
     background-color: #51d68a;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='24' viewBox='0 0 88 24'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='autumn' fill='%2320c1ba' fill-opacity='0.4'%3E%3Cpath d='M10 0l30 15 2 1V2.18A10 10 0 0 0 41.76 0H39.7a8 8 0 0 1 .3 2.18v10.58L14.47 0H10zm31.76 24a10 10 0 0 0-5.29-6.76L4 1 2 0v13.82a10 10 0 0 0 5.53 8.94L10 24h4.47l-6.05-3.02A8 8 0 0 1 4 13.82V3.24l31.58 15.78A8 8 0 0 1 39.7 24h2.06zM78 24l2.47-1.24A10 10 0 0 0 86 13.82V0l-2 1-32.47 16.24A10 10 0 0 0 46.24 24h2.06a8 8 0 0 1 4.12-4.98L84 3.24v10.58a8 8 0 0 1-4.42 7.16L73.53 24H78zm0-24L48 15l-2 1V2.18A10 10 0 0 1 46.24 0h2.06a8 8 0 0 0-.3 2.18v10.58L73.53 0H78z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-
+    font-family: 'Coda', cursive;
 }
 
 .container {
@@ -55,10 +52,9 @@ h2 {
  * Styles for the deck of cards
  */
 
-.deck {
+.deck__container {
     align-items: center;
     background: linear-gradient(160deg, #b06ab3 0%, #4568dc 100%);
-    /*background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);*/
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
@@ -70,11 +66,11 @@ h2 {
     width: 660px;
 }
 
-.deck .card {
+.deck__container .card {
     align-items: center;
     border-radius: 8px;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    color: #ffffff;
+    color: #fff;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -82,24 +78,23 @@ h2 {
     width: 125px;
 }
 
-.deck .card.closed {
+.deck__container .card.closed {
     background: #2e3d49;
     font-size: 0;
 }
 
-.deck .card.open {
+.deck__container .card.open {
     background: #02b3e4;
     cursor: default;
-    /*transform: rotateY(50deg);*/
 }
 
-.deck .card.show {
+.deck__container .card.show {
     font-size: 33px;
 }
 
-.deck .card.match {
-    cursor: default;
+.deck__container .card.match {
     background: #02ccba;
+    cursor: default;
     font-size: 33px;
 }
 
@@ -107,7 +102,7 @@ h2 {
  * Styles for the Score Panel
  */
 
-.score-panel {
+.score-panel__container {
     display: flex;
     flex-wrap: nowrap;
     margin:0 auto;
@@ -117,7 +112,7 @@ h2 {
     width: 530px;
 }
 
-.score-panel .stars {
+.score-panel__stars {
     display: inline-block;
     margin: 0;
     margin: 0 5px 0 0;
@@ -125,31 +120,30 @@ h2 {
     width: 15%;
 }
 
-.score-panel .stars li {
+.score-panel__stars li {
     display: inline-block;
     list-style: none;
 }
 
-.score-panel .timeElapsed {
+.score-panel__time-elapsed {
     display: inline-block;
     width: 20%;
 }
 
-.score-panel .moves {
+.score-panel__moves {
     display: inline-block;
     width: 30%;
 }
 
-.score-panel .matched {
+.score-panel__matched {
     display: inline-block;
     width: 25%;
 }
 
-.score-panel .restart {
+.score-panel__restart-btn {
     cursor: pointer;
     float: right;
     text-align: right;
-    text-align: center;
     width: 15%;
 }
 
@@ -162,7 +156,7 @@ h2 {
 }
 
  .previous-score__container h2 {
-   text-align: center;
+    text-align: center;
 }
 
  .previous-score__table {
@@ -177,15 +171,13 @@ h2 {
 }
 
 .previous-score__table tr,
-  .previous-score__table td {
-   background-color: white;
+.previous-score__table td {
+   background-color: #fff;
 }
 
-
- .previous-score__table tr,
-  .previous-score__table th,
-   .previous-score__table td {
-    /*border: 1px solid silver;*/
+.previous-score__table tr,
+.previous-score__table th,
+.previous-score__table td {
     border-radius: 5px;
     padding: 10px;
     text-align: center;
@@ -266,15 +258,28 @@ h2 {
 
 .shake-to-shuffle {
     animation: shake 1s;
-    /*animation-iteration-count: infinite;*/
+}
+
+@keyframes flip-up {
+    0%   {transform: rotateY(180deg);background-color: #2f3d48; color: #2f3d48;}
+    25%   {background-color: #2f3d48; color: #2f3d48;}
+    100%  {transform: rotateY(0);}
+}
+
+.deck__container .card.open {
+  animation: flip-up 0.4s;
 }
 
 @keyframes wrong-cards {
-    0%   {background-color: #ff3f00; font-size: 20px;}
-    15%  {background-color: #ffbb00; font-size: 10px;}
+    0%   {background-color: #ff3f00; font-size: 8px;}
+    15%  {background-color: #ffbb00; font-size: 4px;}
     30%  {background-color: #ff3f00; font-size: 0px;}
     50%   {transform: rotateY(90deg);}
     100%  {transform: rotateY(0);}
+}
+
+.deck__container .card.closed {
+  animation: wrong-cards 0.8s;
 }
 
 @keyframes matching-cards {
@@ -288,79 +293,61 @@ h2 {
     100%  {background-color: #02ccba;}
 }
 
-@keyframes flip-up {
-    0%   {transform: rotateY(180deg);background-color: #2f3d48; color: #2f3d48;}
-    25%   {background-color: #2f3d48; color: #2f3d48;}
-    100%  {transform: rotateY(0);}
-}
-
-.deck .card.match {
+.deck__container .card.match {
     animation: matching-cards 1.2s;
-}
-
-.deck .card.open {
-  animation: flip-up 0.4s;
-}
-
-.deck .card.closed {
-  animation: wrong-cards 0.8s;
 }
 
 /*
  * Styles for Modal
  */
 
-/* The Modal (background) */
-.modal-background {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+.modal__background {
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+    height: 100%;
     left: 0;
+    overflow: auto;
+    position: fixed;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    z-index: 1;
 }
 
-/* Modal Content/Box */
-.modal-window {
+.modal__window {
     background-color: #fff;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
     border: 1px solid #888;
-    width: 550px; /* Could be more or less, depending on screen size */
+    margin: 15% auto;
+    padding: 20px;
     text-align: center;
+    width: 550px;
 }
 
-/* The Close Button */
-.modal-close {
+.modal__close-btn {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.modal-close:hover,
-.modal-close:focus {
+.modal__close-btn:hover,
+.modal__close-btn:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-/* The New Game Button */
-.modal-restart-btn {
-  padding: 10px;
+.modal__restart-btn {
   border-radius: 5px;
   background-color: #02ccba;
   color: #fff;
+  display: block;
   font-size: 14px;
   margin-left: auto;
   margin-right: auto;
-  display: block;
+  padding: 10px;
 }
 
-.modal-restart-btn:hover {
+.modal__restart-btn:hover {
   background-color: #1e8495;
 }
