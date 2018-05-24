@@ -323,6 +323,10 @@ h2 {
     width: 550px;
 }
 
+.modal__msg-default {
+    margin-top: 30px;
+}
+
 .modal__close-btn {
     color: #aaa;
     float: right;

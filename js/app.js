@@ -214,7 +214,7 @@ function checkMovesNumber() {
   } else if (movesNumber > 34) {
     starRating = 0;
     toOStar(STAR_1);
-    modalMsg.innerHTML = '<h3>Game over! You made too many moves! Try again!</h3><p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber + '</p><p><strong>Your rating:</strong> ' + starRating + ' stars</p>';
+    modalMsg.innerHTML = '<h3>GAME OVER!!</h3><p>You made too many moves! Try again!</p><p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber + '</p><p><strong>Your rating:</strong> ' + starRating + ' stars</p>';
     MODAL.style.display = 'block';
     clearInterval(timer);
   } else {
@@ -255,22 +255,22 @@ function setModalMsg() {
   let gameStatsMsg;
   switch (starRating) {
     case 3:
-    commentMsg = '<h3>You won! You have amazing memory skills!!</h3>';
+    commentMsg = '<h3>YOU WON THE GAME!!</h3><p>You have amazing memory skills!! Top score!!</p>';
     break;
     case 2.5:
-    commentMsg = '<h3>You won! You have good memory skills!!</h3>';
+    commentMsg = '<h3>YOU WON THE GAME!!</h3><p>You have good memory skills!!</p>';
     break;
     case 2:
-    commentMsg = '<h3>You won! Good job!!</h3>';
+    commentMsg = '<h3>YOU WON THE GAME!!</h3><p>Good job at matching those cards!!</p>';
     break;
     case 1.5:
-    commentMsg = '<h3>You won! Keep exercising to improve your memory skills!!</h3>';
+    commentMsg = '<h3>YOU WON THE GAME!!</h3><p>Keep playing and training to get a better score!!</p>';
     break;
     case 1:
-    commentMsg = '<h3>You won! Try finding the matching cards with less moves next time!!</h3>';
+    commentMsg = '<h3>YOU WON THE GAME!!</h3><p>You can do better! Try completing the game with less moves next time!!</p>';
     break;
     case 0.5:
-    commentMsg = '<h3>You were close to the maximum number of moves... But you won!!</h3>';
+    commentMsg = '<h3>YOU WON...that was CLOSE!!</h3><p>You were close to reaching the maximum number of moves... But you won!!</p>';
     break;
     }
   gameStatsMsg = '<p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber +'</p>';
