@@ -18,7 +18,7 @@ Once you win or lose the game, or any time you want to **restart the game**, cli
 
 The game will register your **score** in the table beneath the cards every time you win, so you can check your performance progress.
 
-## Game Details
+## Overview
 
 ### Game Mechanics
 
