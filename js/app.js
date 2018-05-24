@@ -18,7 +18,7 @@ const RESTART_MODAL_BTN = document.getElementsByClassName('modal__restart-btn')[
 let openCardsHC = document.getElementsByClassName('open show');
 let toBeReflippedHC = document.getElementsByClassName('toBeReflipped');
 let matchCardsHC = document.getElementsByClassName('match');
-let modalMessage = document.getElementById('modalMessage');
+let modalMsg = document.getElementById('modalMsg');
 let movesNumber = 0;
 let matchedCouplesNumber = 0;
 let starRating = 3;
@@ -198,34 +198,40 @@ function incrementMovesNumber() {
 function checkMovesNumber() {
   if (movesNumber > 14 && movesNumber <=18) {
     starRating = 2.5;
-    STAR_3.classList.remove('fa-star');
-    STAR_3.classList.add('fa-star-half-o');
+    toHalfOStar(STAR_3);
   } else if (movesNumber > 18 && movesNumber <=22) {
     starRating = 2;
-    STAR_3.classList.remove('fa-star-half-o');
-    STAR_3.classList.add('fa-star-o');
+    toOStar(STAR_3);
   } else if (movesNumber > 22 && movesNumber <=26) {
     starRating = 1.5;
-    STAR_2.classList.remove('fa-star');
-    STAR_2.classList.add('fa-star-half-o');
+    toHalfOStar(STAR_2);
   } else if (movesNumber > 26 && movesNumber <=30) {
     starRating = 1;
-    STAR_2.classList.remove('fa-star-half-o');
-    STAR_2.classList.add('fa-star-o');
+    toOStar(STAR_2);
   } else if (movesNumber > 30 && movesNumber <=34) {
     starRating = 0.5;
-    STAR_1.classList.remove('fa-star');
-    STAR_1.classList.add('fa-star-half-o');
+    toHalfOStar(STAR_1);
   } else if (movesNumber > 34) {
     starRating = 0;
-    STAR_1.classList.remove('fa-star-half-o');
-    STAR_1.classList.add('fa-star-o');
-    modalMessage.innerHTML = '<h3>Game over! You made too many moves! Try again!</h3><p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber + '</p><p><strong>Your rating:</strong> ' + starRating + ' stars</p>';
+    toOStar(STAR_1);
+    modalMsg.innerHTML = '<h3>Game over! You made too many moves! Try again!</h3><p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber + '</p><p><strong>Your rating:</strong> ' + starRating + ' stars</p>';
     MODAL.style.display = 'block';
     clearInterval(timer);
   } else {
     return;
   }
+}
+
+//Deplete half star
+function toHalfOStar(star) {
+  star.classList.remove('fa-star');
+  star.classList.add('fa-star-half-o');
+}
+
+//Deplete whole star
+function toOStar(star) {
+  star.classList.remove('fa-star-half-o');
+  star.classList.add('fa-star-o');
 }
 
 //Check if all pairs have been matched.
@@ -234,7 +240,7 @@ function checkMovesNumber() {
 function checkIfGameOver() {
   let matchCardsArray = Array.prototype.slice.call(matchCardsHC);
   if (matchCardsArray.length === 16) {
-    setStarRating();
+    setModalMsg();
     recordLastScore();
     MODAL.style.display = 'block';
     clearInterval(timer);
@@ -243,37 +249,37 @@ function checkIfGameOver() {
   }
 }
 
-//Set the star rating according to the moves number.
-function setStarRating() {
-  let alertMessage;
-  let gameStatsMessage;
+//Returns a message in the modal based on the star rating.
+function setModalMsg() {
+  let commentMsg;
+  let gameStatsMsg;
   switch (starRating) {
     case 3:
-    alertMessage = '<h3>You won! You have amazing memory skills!!</h3>';
+    commentMsg = '<h3>You won! You have amazing memory skills!!</h3>';
     break;
     case 2.5:
-    alertMessage = '<h3>You won! You have good memory skills!!</h3>';
+    commentMsg = '<h3>You won! You have good memory skills!!</h3>';
     break;
     case 2:
-    alertMessage = '<h3>You won! Good job!!</h3>';
+    commentMsg = '<h3>You won! Good job!!</h3>';
     break;
     case 1.5:
-    alertMessage = '<h3>You won! Keep exercising to improve your memory skills!!</h3>';
+    commentMsg = '<h3>You won! Keep exercising to improve your memory skills!!</h3>';
     break;
     case 1:
-    alertMessage = '<h3>You won! Try finding the matching cards with less moves next time!!</h3>';
+    commentMsg = '<h3>You won! Try finding the matching cards with less moves next time!!</h3>';
     break;
     case 0.5:
-    alertMessage = '<h3>You were close to the maximum number of moves... But you won!!</h3>';
+    commentMsg = '<h3>You were close to the maximum number of moves... But you won!!</h3>';
     break;
     }
-  gameStatsMessage = '<p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber +'</p>';
+  gameStatsMsg = '<p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber +'</p>';
   if (starRating >=2) {
-    gameStatsMessage += '<p><strong>Your rating:</strong> ' + starRating + ' stars</p>';
+    gameStatsMsg += '<p><strong>Your rating:</strong> ' + starRating + ' stars</p>';
   } else if (starRating <=1.5) {
-    gameStatsMessage += '<p><strong>Your rating:</strong> ' + starRating + ' star</p>';
+    gameStatsMsg += '<p><strong>Your rating:</strong> ' + starRating + ' star</p>';
   }
-  modalMessage.innerHTML = alertMessage + gameStatsMessage;
+  modalMsg.innerHTML = commentMsg + gameStatsMsg;
 }
 
 //Create a row on the Previous Score table to record game stats in case of victory.
