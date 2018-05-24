@@ -60,7 +60,7 @@ function restartGame() {
     resetCards();
   }
 
-  if (movesNumber !==0) {
+  if (movesNumber !== 0) {
     movesNumber = 0;
     MOVES_NUMBER_DISPLAY.textContent = movesNumber;
   }
@@ -127,11 +127,11 @@ function flipCard(evt) {
   }
 
   let openCardsArray = Array.prototype.slice.call(openCardsHC);
-  if (openCardsArray.length ===2) {
+  if (openCardsArray.length === 2) {
     checkIfMatching();
   }
 
-  if (openCardsArray.length >2) {
+  if (openCardsArray.length > 2) {
     flipOpenCards();
   }
 }
@@ -148,7 +148,6 @@ function checkIfMatching() {
   let openCardsArray = Array.prototype.slice.call(openCardsHC);
   if (openCardsArray[0].classList[1] === openCardsArray[1].classList[1]) {
     turnIntoMatched(openCardsArray);
-    incrementMatchedCouples();
     incrementMovesNumber();
     setTimeout(checkMovesNumber, 300);
     setTimeout(checkIfGameOver, 500);
@@ -174,16 +173,13 @@ function flipOpenCards() {
   });
 }
 
-//Add .match and remove .open/show class to the matched pair
+//Add .match, remove .open/show class to the matched pair,
+//add +1 matched couple.
 function turnIntoMatched(card) {
   card.forEach(function(card) {
     card.classList.add('match');
     card.classList.remove('open', 'show');
   });
-}
-
-//Increment matched pair no. and display it
-function incrementMatchedCouples() {
   matchedCouplesNumber++;
   MATCHED_COUPLE_DISPLAY.textContent = matchedCouplesNumber;
 }
@@ -196,19 +192,19 @@ function incrementMovesNumber() {
 
 //Check moves no. to change star rating and check if maximum moves no. has been reached.
 function checkMovesNumber() {
-  if (movesNumber > 14 && movesNumber <=18) {
+  if (movesNumber > 14 && movesNumber <= 18) {
     starRating = 2.5;
     toHalfOStar(STAR_3);
-  } else if (movesNumber > 18 && movesNumber <=22) {
+  } else if (movesNumber > 18 && movesNumber <= 22) {
     starRating = 2;
     toOStar(STAR_3);
-  } else if (movesNumber > 22 && movesNumber <=26) {
+  } else if (movesNumber > 22 && movesNumber <= 26) {
     starRating = 1.5;
     toHalfOStar(STAR_2);
-  } else if (movesNumber > 26 && movesNumber <=30) {
+  } else if (movesNumber > 26 && movesNumber <= 30) {
     starRating = 1;
     toOStar(STAR_2);
-  } else if (movesNumber > 30 && movesNumber <=34) {
+  } else if (movesNumber > 30 && movesNumber <= 34) {
     starRating = 0.5;
     toHalfOStar(STAR_1);
   } else if (movesNumber > 34) {
@@ -222,13 +218,13 @@ function checkMovesNumber() {
   }
 }
 
-//Deplete half star
+//Deplete half star.
 function toHalfOStar(star) {
   star.classList.remove('fa-star');
   star.classList.add('fa-star-half-o');
 }
 
-//Deplete whole star
+//Deplete whole star.
 function toOStar(star) {
   star.classList.remove('fa-star-half-o');
   star.classList.add('fa-star-o');
@@ -274,9 +270,9 @@ function setModalMsg() {
     break;
     }
   gameStatsMsg = '<p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber +'</p>';
-  if (starRating >=2) {
+  if (starRating >= 2) {
     gameStatsMsg += '<p><strong>Your rating:</strong> ' + starRating + ' stars</p>';
-  } else if (starRating <=1.5) {
+  } else if (starRating <= 1.5) {
     gameStatsMsg += '<p><strong>Your rating:</strong> ' + starRating + ' star</p>';
   }
   modalMsg.innerHTML = commentMsg + gameStatsMsg;
