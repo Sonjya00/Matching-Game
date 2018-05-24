@@ -11,7 +11,7 @@ const STAR_2= document.getElementById('star2');
 const STAR_3= document.getElementById('star3');
 const ALL_STARS_HC = document.getElementsByClassName('star');
 const ALL_STARS_ARRAY = Array.prototype.slice.call(ALL_STARS_HC);
-const MODAL = document.getElementById('myModal');
+const MODAL = document.getElementById('gameModal');
 const ESCAPE_MODAL_BTN = document.getElementsByClassName('modal__close-btn')[0];
 const RESTART_MODAL_BTN = document.getElementsByClassName('modal__restart-btn')[0];
 
