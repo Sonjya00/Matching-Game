@@ -172,7 +172,7 @@ h2 {
 
 .previous-score__table tr,
 .previous-score__table td {
-   background-color: #fff;
+    background-color: #fff;
 }
 
 .previous-score__table tr,
@@ -188,21 +188,21 @@ h2 {
  */
 
 .footer__container {
-  background-color: #2f3d48;
-  color: #fff;
-  height: 180px;
-  margin-top: 20px;
-  padding-top: 5px;
-  text-align: center;
-  width: 100%;
+    background-color: #2f3d48;
+    color: #fff;
+    height: 180px;
+    margin-top: 20px;
+    padding-top: 5px;
+    text-align: center;
+    width: 100%;
 }
 
 .footer__social-media {
-  list-style:none;
+    list-style:none;
 }
 
 .footer__social-media li {
-  display: inline-block;
+    display: inline-block;
 }
 
 /*
@@ -210,32 +210,32 @@ h2 {
  */
 
 .contacts-link {
-  background-color: #27afc4;
-  border: 1px double #fff;
-  border-radius: 50%;
-  font-size: 18px;
-  line-height: 1.5em;
-  margin-left: 15px;
-  margin-right: 15px;
-  padding: 0.5em;
-  position: relative;
-  text-decoration: none;
-  width: 45px;
+    background-color: #27afc4;
+    border: 1px double #fff;
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1.5em;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 0.5em;
+    position: relative;
+    text-decoration: none;
+    width: 45px;
 }
 
 .contacts-link a {
-  color: #fff;
-  margin: -14px;
-  padding: 14px;
+    color: #fff;
+    margin: -14px;
+    padding: 14px;
 }
 
 .contacts-link:hover {
-  background-color: #1e8495;
-  cursor: pointer;
+    background-color: #1e8495;
+    cursor: pointer;
 }
 
 .contacts-link a:visited {
-  color: #fff;
+    color: #fff;
 }
 
 /*
@@ -261,29 +261,29 @@ h2 {
 }
 
 @keyframes flip-up {
-    0%   {transform: rotateY(180deg);background-color: #2f3d48; color: #2f3d48;}
-    25%   {background-color: #2f3d48; color: #2f3d48;}
+    0%  {transform: rotateY(180deg);background-color: #2f3d48; color: #2f3d48;}
+    25%  {background-color: #2f3d48; color: #2f3d48;}
     100%  {transform: rotateY(0);}
 }
 
 .deck__container .card.open {
-  animation: flip-up 0.4s;
+    animation: flip-up 0.4s;
 }
 
 @keyframes wrong-cards {
-    0%   {background-color: #ff3f00; font-size: 8px;}
+    0%  {background-color: #ff3f00; font-size: 8px;}
     15%  {background-color: #ffbb00; font-size: 4px;}
     30%  {background-color: #ff3f00; font-size: 0px;}
-    50%   {transform: rotateY(90deg);}
+    50%  {transform: rotateY(90deg);}
     100%  {transform: rotateY(0);}
 }
 
 .deck__container .card.closed {
-  animation: wrong-cards 0.8s;
+    animation: wrong-cards 0.8s;
 }
 
 @keyframes matching-cards {
-    0%   {background-color: #02ccba;}
+    0%  {background-color: #02ccba;}
     15%  {transform: translate(0, -10px);}
     25%  {background-color: #02cc16;}
     30%  {transform: translate(0, 20px);}
@@ -338,16 +338,16 @@ h2 {
 }
 
 .modal__restart-btn {
-  border-radius: 5px;
-  background-color: #02ccba;
-  color: #fff;
-  display: block;
-  font-size: 14px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
+    border-radius: 5px;
+    background-color: #02ccba;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
 }
 
 .modal__restart-btn:hover {
-  background-color: #1e8495;
+    background-color: #1e8495;
 }
