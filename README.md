@@ -45,4 +45,6 @@ Beneath the board game, there is a table that shows the **previous game's stats*
 
 ## Credits
 
+Body font: [Google Font](https://fonts.google.com/)
 Background pattern: [https://www.heropatterns.com/](https://www.heropatterns.com/)
+Icons: [BootstrapCDN](https://www.bootstrapcdn.com/)
