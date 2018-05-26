@@ -111,24 +111,23 @@ function resetCards() {
 
 //Flip cards, removes .closed and adds .open/show. Store cards symbols in an array.
 //If 2 cards are open, run check matching cards function.
-//Prevent more than 2 cards from being flipped.
+//If 2 cards are already open, the function won't run.
 function flipCard(evt) {
-
-  let flippedCard = evt.target;
-  if (flippedCard.nodeName === 'LI') {
-    if (!flippedCard.classList.contains('match') && !flippedCard.classList.contains('open')) {
-      flippedCard.classList.remove('closed');
-      flippedCard.classList.add('open', 'show');
-    }
-  }
-
   let openCardsArray = Array.prototype.slice.call(openCardsHC);
   if (openCardsArray.length === 2) {
-    checkIfMatching();
-  }
-
-  if (openCardsArray.length > 2) {
-    flipOpenCards();
+    return;
+  } else {
+    let flippedCard = evt.target;
+    if (flippedCard.nodeName === 'LI') {
+      if (!flippedCard.classList.contains('match') && !flippedCard.classList.contains('open')) {
+        flippedCard.classList.remove('closed');
+        flippedCard.classList.add('open', 'show');
+      }
+    }
+    let openCardsArray = Array.prototype.slice.call(openCardsHC);
+    if (openCardsArray.length === 2) {
+      checkIfMatching();
+    }
   }
 }
 
