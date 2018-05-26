@@ -10,6 +10,8 @@ Build a complete browser-based card matching game using HTML, CSS, and JavaScrip
 
 ## How to play
 
+To start the game, download the project and open the file index.html with a web browser.
+
 Click on **two cards at a time** to flip them over. If the two cards match, they will stay flipped; otherwise, they will flip face down again. To **win the game**, keep flipping the cards until all cards have been matched with their pair.
 
 Try to complete the game **with the fewest moves and in the shortest time possible**. At the end of the game, you will get a **score** based on the number of moves you made to complete it. You can check your current score by looking at the **stars** in the top left corner: as you keep making more moves, the stars will gradually deplete.
@@ -41,7 +43,7 @@ The **star rating system** is based on the number of moves the player makes. At 
 
 ### Previous Game's Stats Table
 
-Beneath the board game, there is a table that shows the **previous game's stats** (time elapsed, moves number, star rating). This will be displayed only upon completion of the first game. Only in case the player wins will a line with its stats be added.
+Beneath the board game, there is a table that shows the **previous game's stats** (time elapsed, moves number, star rating). This will be displayed only upon completion of the first game. Only in case the player wins will a line with its stats be added. Even though the games interrupted (the player clicks the button "restart" before matching all the cards) don't have their stats printed, the game still keeps track of them when assigning the Game No. to each line of the games won.
 
 ## Credits
 

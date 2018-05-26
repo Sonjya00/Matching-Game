@@ -197,7 +197,7 @@ function checkMovesNumber() {
   } else if (movesNumber > 22 && movesNumber <= 26) {
     starRating = 1.5;
     toHalfOStar(STAR_2);
-  } else if (movesNumber > 26 && movesNumber <= 30) {
+  } else if (movesNumber > 26) {
     starRating = 1;
     toOStar(STAR_2);
   }
