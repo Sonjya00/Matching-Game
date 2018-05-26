@@ -6,11 +6,8 @@ const MOVES_NUMBER_DISPLAY = document.getElementById('movesNumberDisplay');
 const RESTART_BUTTON = document.getElementById('restartButton');
 const PREVIOUS_SCORE_TABLE = document.getElementById('previous-score__table');
 const PREVIOUS_SCORE_CNT = document.getElementById('previous-score__container');
-/*const STAR_1= document.getElementById('star1');*/
 const STAR_2= document.getElementById('star2');
 const STAR_3= document.getElementById('star3');
-/*const ALL_STARS_HC = document.getElementsByClassName('star');
-const ALL_STARS_ARRAY = Array.prototype.slice.call(ALL_STARS_HC);*/
 const MODAL = document.getElementById('gameModal');
 const ESCAPE_MODAL_BTN = document.getElementsByClassName('modal__close-btn')[0];
 const RESTART_MODAL_BTN = document.getElementsByClassName('modal__restart-btn')[0];
@@ -70,9 +67,6 @@ function restartGame() {
   }
 
   starRating = 3;
-  /*ALL_STARS_ARRAY.forEach(function(star) {
-    star.className = 'fa fa-star star';
-  });*/
   STAR_2.className = 'fa fa-star star';
   STAR_3.className = 'fa fa-star star';
 
@@ -141,9 +135,9 @@ function flipCard(evt) {
 //Called when 2 cards are .open/shown.
 //If they are a matching pair, make them .match and not .open/.show,
 //Add +1 matching couple found, add +1 move.
-//Check first if max moves no. has been reached, then check if player has won.
+//Check no. moves to adjust star rating, then check if player has won.
 //If they are not a matching pair, add a temporary class to identity which cards need to be closed.
-//Add +1 matching couple found, add +1 move.
+//Add +1 matching couple found, add +1 move, and check moves no. / star rating.
 //Then call function to close non-matching cards.
 function checkIfMatching() {
 
@@ -192,7 +186,7 @@ function incrementMovesNumber() {
   MOVES_NUMBER_DISPLAY.textContent = movesNumber;
 }
 
-//Check moves no. to change star rating and check if maximum moves no. has been reached.
+//Check moves no. to change star rating.
 function checkMovesNumber() {
   if (movesNumber > 14 && movesNumber <= 18) {
     starRating = 2.5;
@@ -205,19 +199,7 @@ function checkMovesNumber() {
     toHalfOStar(STAR_2);
   } else if (movesNumber > 26 && movesNumber <= 30) {
     starRating = 1;
-    toOStar(STAR_2);/*
-  } else if (movesNumber > 30 && movesNumber <= 34) {
-    starRating = 0.5;
-    toHalfOStar(STAR_1);
-  } else if (movesNumber > 34) {
-    starRating = 0;
-    toOStar(STAR_1);
-  } else if (movesNumber > 30) {
-    modalMsg.innerHTML = '<h3>GAME OVER!!</h3><p>You made too many moves! Try again!</p><p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber + '</p><p><strong>Your rating:</strong> ' + starRating + ' stars</p>';
-    MODAL.style.display = 'block';
-    clearInterval(timer);
-  } else {
-    return;*/
+    toOStar(STAR_2);
   }
 }
 
@@ -268,10 +250,6 @@ function setModalMsg() {
     case 1:
     commentMsg = '<h3>YOU WON THE GAME!!</h3><p>You can do better! Try completing the game with less moves next time!!</p>';
     break;
-    /*
-    case 0.5:
-    commentMsg = '<h3>YOU WON...that was CLOSE!!</h3><p>You were close to reaching the maximum number of moves... But you won!!</p>';
-    break;*/
     }
   gameStatsMsg = '<p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber +'</p>';
   if (starRating >= 2) {
