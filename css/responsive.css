@@ -1,0 +1,301 @@
+/*
+ * Styles for Headers
+ */
+
+h1 {
+    font-size: 42px;
+    padding-bottom: 10px;
+    width: 300px;
+}
+
+h2 {
+    font-size: 34px;
+    width: 300px;
+}
+
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel__container {
+    font-size: 16px;
+    width: 300px;
+}
+
+.score-panel__stars {
+    display: inline-block;
+    width: 25%;
+}
+
+.score-panel__time-elapsed {
+    display: inline-block;
+    width: 25%;
+}
+
+.score-panel__moves {
+    display: inline-block;
+    width: 25%;
+}
+
+.score-panel__matched {
+    display: none;
+}
+
+.score-panel__restart-btn {
+    width: 25%;
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck__container {
+    padding: 20px;
+    width: 300px;
+}
+
+.deck__container .card {
+    height: 56px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 56px;
+}
+
+.deck__container .card.show,
+.deck__container .card.match {
+    font-size: 25px;
+}
+
+/*
+ * Styles for the Previous Score
+ */
+
+ .previous-score__table {
+    margin: auto;
+    width: 300px;
+}
+
+ .previous-score__table tr,
+ .previous-score__table th,
+ .previous-score__table td {
+    font-size: 15px;
+}
+
+/*
+ * Styles for Modal
+ */
+
+.modal__window {
+    width: 265px;
+}
+
+/*
+ * Styles for Footer
+ */
+
+ .footer__container {
+     height: 180px;
+     margin-top: 40px;
+     padding-top: 5px;
+ }
+
+/*
+ * MEDIA QUERIES
+ */
+
+@media screen and (min-width: 360px) {
+    h1 {
+        font-size: 43px;
+        line-height: 65px;
+        padding-bottom: 0;
+        width: 340px;
+    }
+    h2 {
+        font-size: 36px;
+        width: 340px;
+    }
+    .score-panel__container {
+        font-size: 20px;
+        width: 340px;
+    }
+    .deck__container {
+        width: 340px;
+    }
+    .deck__container .card {
+        height: 64px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 64px;
+    }
+    .deck__container .card.show,
+    .deck__container .card.match {
+        font-size: 26px;
+    }
+    .previous-score__table {
+        width: 340px;
+    }
+    .previous-score__table tr,
+    .previous-score__table th,
+    .previous-score__table td {
+        font-size: 16px;
+     }
+    .modal__window {
+        width: 290px;
+    }
+}
+
+@media screen and (min-width: 410px) {
+    h1 {
+        font-size: 48px;
+        line-height: 70px;
+        width: 380px;
+    }
+    h2 {
+        font-size: 38px;
+        width: 100%;
+    }
+    .score-panel__container {
+        font-size: 22px;
+        width: 390px;
+    }
+    .deck__container {
+        width: 390px;
+        padding: 26px;
+    }
+    .deck__container .card {
+        height: 72px;
+        width: 72px;
+    }
+    .deck__container .card.show,
+    .deck__container .card.match {
+        font-size: 28px;
+    }
+    .previous-score__table {
+        width: 390px;
+    }
+    .previous-score__table tr,
+    .previous-score__table th,
+    .previous-score__table td {
+        font-size: 18px;
+    }
+    .modal__window {
+        width: 330px;
+    }
+}
+
+  @media screen and (min-width: 460px) {
+    h1,
+    h2 {
+        width: 440px;
+    }
+    .score-panel__container {
+        width: 400px;
+    }
+    .deck__container {
+        width: 400px;
+    }
+    .deck__container .card {
+        width: 76px;
+        height: 76px;
+    }
+    .previous-score__table {
+        width: 400px;
+    }
+}
+
+  @media screen and (min-width: 540px) {
+    h1 {
+        font-size: 50px;
+        width: 460px;
+    }
+    h2 {
+        width: 100%;
+    }
+    .score-panel__container {
+        font-size: 18px;
+        width: 460px;
+    }
+    .score-panel__stars {
+        width: 20%;
+    }
+    .score-panel__time-elapsed {
+        width: 20%;
+    }
+    .score-panel__moves {
+        width: 25%;
+    }
+    .score-panel__matched {
+        display: inline-block;
+        width: 25%;
+    }
+    .score-panel__restart-btn {
+        width: 15%;
+    }
+    .deck__container {
+        width: 460px;
+    }
+    .deck__container .card {
+        height: 85px;
+        width: 85px;
+    }
+    .previous-score__table {
+        width: 460px;
+    }
+    .modal__window {
+        width: 380px;
+    }
+}
+
+@media screen and (min-width: 650px) {
+    h1 {
+        font-size: 50px;
+        width: 100%;
+    }
+    h2 {
+      font-size: 40px;
+    }
+    .score-panel__container {
+        width: 560px;
+    }
+    .deck__container {
+        padding: 32px;
+        width: 560px;
+    }
+    .deck__container .card {
+        height: 100px;
+        width: 100px;
+    }
+    .deck__container .card.show,
+    .deck__container .card.match {
+        font-size: 33px;
+    }
+    .previous-score__table {
+        width: 560px;
+    }
+    .modal__window {
+        width: 450px;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    h1 {
+        font-size: 60px;
+    }
+    h2 {
+        font-size: 42px;
+    }
+    .score-panel__container {
+        font-size: 18px;
+        width: 600px;
+    }
+    .deck__container {
+        width: 600px;
+    }
+    .deck__container .card {
+        height: 110px;
+        width: 110px;
+    }
+    .previous-score__table {
+        width: 600px;
+    }
+}

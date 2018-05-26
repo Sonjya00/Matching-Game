@@ -38,14 +38,39 @@ th {
     color: #b06ab3;
 }
 
-h1 {
-    font-size: 54px;
+h1,
+h2 {
     text-shadow: 2px 2px #caa6ff;
+    text-align: center;
 }
 
-h2 {
-    font-size: 36px;
-    text-shadow: 2px 2px #caa6ff;
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel__container {
+    display: flex;
+    flex-wrap: nowrap;
+    margin:0 auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.score-panel__stars {
+    margin: 0;
+    margin: 0 5px 0 0;
+    padding: 0;
+}
+
+.score-panel__stars li {
+    display: inline-block;
+    list-style: none;
+}
+
+.score-panel__restart-btn:hover {
+    cursor: pointer;
+    color: #4568dc;
 }
 
 /*
@@ -60,10 +85,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 0 0 3em;
-    min-height: 680px;
-    padding: 32px;
-    width: 660px;
+    margin: 0 0 2em;
 }
 
 .deck__container .card {
@@ -74,8 +96,6 @@ h2 {
     cursor: pointer;
     display: flex;
     justify-content: center;
-    height: 125px;
-    width: 125px;
 }
 
 .deck__container .card.closed {
@@ -88,63 +108,9 @@ h2 {
     cursor: default;
 }
 
-.deck__container .card.show {
-    font-size: 33px;
-}
-
 .deck__container .card.match {
     background: #02ccba;
     cursor: default;
-    font-size: 33px;
-}
-
-/*
- * Styles for the Score Panel
- */
-
-.score-panel__container {
-    display: flex;
-    flex-wrap: nowrap;
-    margin:0 auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-    width: 530px;
-}
-
-.score-panel__stars {
-    display: inline-block;
-    margin: 0;
-    margin: 0 5px 0 0;
-    padding: 0;
-    width: 15%;
-}
-
-.score-panel__stars li {
-    display: inline-block;
-    list-style: none;
-}
-
-.score-panel__time-elapsed {
-    display: inline-block;
-    width: 20%;
-}
-
-.score-panel__moves {
-    display: inline-block;
-    width: 30%;
-}
-
-.score-panel__matched {
-    display: inline-block;
-    width: 25%;
-}
-
-.score-panel__restart-btn {
-    cursor: pointer;
-    float: right;
-    text-align: right;
-    width: 15%;
 }
 
 /*
@@ -153,16 +119,16 @@ h2 {
 
 .previous-score__container {
     display: none;
+    padding-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
  .previous-score__container h2 {
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
-
- .previous-score__table {
-    margin: auto;
-    width: 660px;
- }
 
 .previous-score__table th {
     background-color: #4568dc;
@@ -190,15 +156,15 @@ h2 {
 .footer__container {
     background-color: #2f3d48;
     color: #fff;
-    height: 180px;
-    margin-top: 20px;
-    padding-top: 5px;
     text-align: center;
     width: 100%;
 }
 
 .footer__social-media {
     list-style:none;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .footer__social-media li {
@@ -236,6 +202,65 @@ h2 {
 
 .contacts-link a:visited {
     color: #fff;
+}
+
+/*
+ * Styles for Modal
+ */
+
+.modal__background {
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+    height: 100%;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.modal__window {
+    background-color: #fff;
+    border: 1px solid #888;
+    font-size: 16px;
+    margin: 15% auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.modal__msg-default {
+    margin-top: 30px;
+}
+
+.modal__close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal__close-btn:hover,
+.modal__close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal__restart-btn {
+    border-radius: 5px;
+    background-color: #02ccba;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+.modal__restart-btn:hover {
+    background-color: #1e8495;
 }
 
 /*
@@ -295,63 +320,4 @@ h2 {
 
 .deck__container .card.match {
     animation: matching-cards 1.2s;
-}
-
-/*
- * Styles for Modal
- */
-
-.modal__background {
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-    display: none;
-    height: 100%;
-    left: 0;
-    overflow: auto;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-}
-
-.modal__window {
-    background-color: #fff;
-    border: 1px solid #888;
-    margin: 15% auto;
-    padding: 20px;
-    text-align: center;
-    width: 550px;
-}
-
-.modal__msg-default {
-    margin-top: 30px;
-}
-
-.modal__close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.modal__close-btn:hover,
-.modal__close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal__restart-btn {
-    border-radius: 5px;
-    background-color: #02ccba;
-    color: #fff;
-    display: block;
-    font-size: 14px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px;
-}
-
-.modal__restart-btn:hover {
-    background-color: #1e8495;
 }
