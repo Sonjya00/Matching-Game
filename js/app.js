@@ -6,11 +6,11 @@ const MOVES_NUMBER_DISPLAY = document.getElementById('movesNumberDisplay');
 const RESTART_BUTTON = document.getElementById('restartButton');
 const PREVIOUS_SCORE_TABLE = document.getElementById('previous-score__table');
 const PREVIOUS_SCORE_CNT = document.getElementById('previous-score__container');
-const STAR_1= document.getElementById('star1');
+/*const STAR_1= document.getElementById('star1');*/
 const STAR_2= document.getElementById('star2');
 const STAR_3= document.getElementById('star3');
-const ALL_STARS_HC = document.getElementsByClassName('star');
-const ALL_STARS_ARRAY = Array.prototype.slice.call(ALL_STARS_HC);
+/*const ALL_STARS_HC = document.getElementsByClassName('star');
+const ALL_STARS_ARRAY = Array.prototype.slice.call(ALL_STARS_HC);*/
 const MODAL = document.getElementById('gameModal');
 const ESCAPE_MODAL_BTN = document.getElementsByClassName('modal__close-btn')[0];
 const RESTART_MODAL_BTN = document.getElementsByClassName('modal__restart-btn')[0];
@@ -70,9 +70,11 @@ function restartGame() {
   }
 
   starRating = 3;
-  ALL_STARS_ARRAY.forEach(function(star) {
+  /*ALL_STARS_ARRAY.forEach(function(star) {
     star.className = 'fa fa-star star';
-  });
+  });*/
+  STAR_2.className = 'fa fa-star star';
+  STAR_3.className = 'fa fa-star star';
 
   matchNumber++;
 
@@ -203,18 +205,19 @@ function checkMovesNumber() {
     toHalfOStar(STAR_2);
   } else if (movesNumber > 26 && movesNumber <= 30) {
     starRating = 1;
-    toOStar(STAR_2);
+    toOStar(STAR_2);/*
   } else if (movesNumber > 30 && movesNumber <= 34) {
     starRating = 0.5;
     toHalfOStar(STAR_1);
   } else if (movesNumber > 34) {
     starRating = 0;
     toOStar(STAR_1);
+  } else if (movesNumber > 30) {
     modalMsg.innerHTML = '<h3>GAME OVER!!</h3><p>You made too many moves! Try again!</p><p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber + '</p><p><strong>Your rating:</strong> ' + starRating + ' stars</p>';
     MODAL.style.display = 'block';
     clearInterval(timer);
   } else {
-    return;
+    return;*/
   }
 }
 
@@ -265,9 +268,10 @@ function setModalMsg() {
     case 1:
     commentMsg = '<h3>YOU WON THE GAME!!</h3><p>You can do better! Try completing the game with less moves next time!!</p>';
     break;
+    /*
     case 0.5:
     commentMsg = '<h3>YOU WON...that was CLOSE!!</h3><p>You were close to reaching the maximum number of moves... But you won!!</p>';
-    break;
+    break;*/
     }
   gameStatsMsg = '<p><strong>Time elapsed:</strong> ' + sec + ' seconds</p>' + '<p><strong>Total moves:</strong> ' + movesNumber +'</p>';
   if (starRating >= 2) {
