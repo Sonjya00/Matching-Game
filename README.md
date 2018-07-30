@@ -10,7 +10,7 @@ Build a complete browser-based card matching game using HTML, CSS, and JavaScrip
 
 ## How to play
 
-To start the game, download the project and open the file index.html with a web browser.
+To start the game, go to https://sonjya00.github.io/Matching-Game/ or download the project and open the file index.html with a web browser.
 
 Click on **two cards at a time** to flip them over. If the two cards match, they will stay flipped; otherwise, they will flip face down again. To **win the game**, keep flipping the cards until all cards have been matched with their pair.
 
